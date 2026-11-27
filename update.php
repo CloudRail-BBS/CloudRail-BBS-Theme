@@ -82,6 +82,32 @@ function rcopy(string $src, string $dst): int
     return $n;
 }
 
+/**
+ * 清理 Discuz 编译缓存，避免更新后仍加载旧 CSS / 模板。
+ */
+function clearDiscuzCache(string $root): int
+{
+    $removed = 0;
+
+    foreach (glob($root . '/data/cache/style_*') ?: [] as $file) {
+        if (is_file($file) && @unlink($file)) $removed++;
+    }
+
+    $tplDir = $root . '/data/template';
+    if (is_dir($tplDir)) {
+        $it = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($tplDir, FilesystemIterator::SKIP_DOTS)
+        );
+        foreach ($it as $file) {
+            if ($file->isFile() && substr($file->getFilename(), -8) === '.tpl.php') {
+                if (@unlink($file->getPathname())) $removed++;
+            }
+        }
+    }
+
+    return $removed;
+}
+
 $versionPath  = $root . '/' . VERSION_FILE;
 $localVersion = is_file($versionPath) ? trim((string)file_get_contents($versionPath)) : '0.0.0';
 $remoteJson   = fetch($rawBase . '/version.json');
@@ -154,9 +180,11 @@ if (is_dir($targetAbs)) {
 }
 
 $count = rcopy($inner, $targetAbs);
+$cleared = clearDiscuzCache($root);
 @unlink($tmpZip);
 rrmdir($tmpDir);
 
 echo '<div class="box ok">更新完成：写入 ' . $count . ' 个文件，当前版本 <code>' . htmlspecialchars($latest) . '</code>。</div>';
+echo '<div class="box">已清理 ' . $cleared . ' 个样式/模板缓存文件，新样式会立即生效。</div>';
 echo '<p>旧版本已备份到 <code>template/cloudrail.bak</code>，确认无误后可删除。</p>';
 echo '<p><strong>记得回后台「工具 → 更新缓存」勾选 CSS 缓存与模板缓存。</strong></p>';

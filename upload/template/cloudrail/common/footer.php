@@ -1,12 +1,6 @@
 <?php exit('Access Denied');?>
 			</div><!-- /#wp -->
 
-			<!--{if empty($_GET['inajax'])}-->
-			<aside id="mint-rail">
-				{cells common/mintrail}
-			</aside>
-			<!--{/if}-->
-
 		</div><!-- /#mint-main -->
 	</div><!-- /#mint-app -->
 
