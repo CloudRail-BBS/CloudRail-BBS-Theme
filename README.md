@@ -1,6 +1,12 @@
-# Mint · Discuz! X5.0 主题
+# CloudRail BBS Theme
 
 一套面向 Discuz! X5.0（MitFrame 架构）的浅色/深色双主题模板套系。视觉参考 klpbbs.com：低饱和中性底色、蓝白主色、细描边卡片、克制的阴影与圆角。
+
+- 仓库：<https://github.com/CloudRail-BBS/CloudRail-BBS-Theme>
+- 版本：`1.0.0`
+- 适用：Discuz! X5.0+ / PHP 8.0+
+
+> 内部类名与文件名仍沿用 `mint-` 前缀（如 `mint_js.htm`、`#mint-top`、`--mint-brand`）。这是早期命名，为控制改动风险没有批量重命名，不影响使用，改样式时按前缀找即可。
 
 ## 目录结构
 
