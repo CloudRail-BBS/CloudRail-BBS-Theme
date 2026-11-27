@@ -1,3 +1,5 @@
 upload/template/mint/
 *.zip
 preview/_sim*.html
+.audit_tmp/
+.refsrc/

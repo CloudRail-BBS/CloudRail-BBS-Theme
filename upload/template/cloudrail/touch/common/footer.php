@@ -71,8 +71,10 @@
 	var root = document.documentElement;
 	try {
 		var saved = localStorage.getItem(KEY);
-		if (saved) root.setAttribute('data-mint-theme', saved);
-	} catch (e) {}
+		root.setAttribute('data-mint-theme', saved || 'auto');
+	} catch (e) {
+		root.setAttribute('data-mint-theme', 'auto');
+	}
 })();
 </script>
 

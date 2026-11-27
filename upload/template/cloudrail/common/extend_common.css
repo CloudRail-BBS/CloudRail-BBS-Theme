@@ -988,15 +988,7 @@ pre {
     color: var(--mint-text-2);
 }
 
-/* ---------- 右侧栏 ---------- */
-
-#mint-rail {
-    align-self: start;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-}
+/* ---------- 右侧栏卡片 ---------- */
 
 .mint-rail-card {
     background: var(--mint-surface);
@@ -1303,7 +1295,7 @@ html[data-mint-theme="dark"] .mint-card-pop {
         padding: 4px 0 16px;
     }
 
-    .mint-nav a {
+    .mint-nav li > a {
         justify-content: center;
         padding: 0;
     }
@@ -1315,7 +1307,7 @@ html[data-mint-theme="dark"] .mint-card-pop {
     }
 
     #mint-side,
-    #mint-rail {
+    #mint-main > #mint-rail {
         display: none;
     }
 

@@ -359,16 +359,7 @@
     table-layout: auto;
 }
 
-/* 作者栏 */
-#postlist td.pls {
-    width: 196px;
-    background: var(--mint-surface-2) !important;
-    border-right: 1px solid var(--mint-line) !important;
-    padding: 20px 16px !important;
-    text-align: center;
-    vertical-align: top;
-}
-
+/* 作者栏（左栏收窄为头像条，其余由 mint_js 移入 .pi 后隐藏） */
 #postlist td.pls .avatar {
     width: 72px;
     height: 72px;
@@ -423,35 +414,7 @@
     width: 100% !important;
 }
 
-/* 作者行 */
-#postlist .pi {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px !important;
-    border-bottom: 1px solid var(--mint-line);
-    background: transparent !important;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-#postlist .pi .authi {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-#postlist .pi .authi a {
-    font-size: 14px !important;
-    font-weight: 650 !important;
-    color: var(--mint-text) !important;
-}
-
-#postlist .pi .authi a:hover {
-    color: var(--mint-brand-ink) !important;
-}
-
+/* 作者行（统一定义见下方「楼层信息条」，避免两套规则互相覆盖） */
 #postlist .pi strong,
 #postlist .pi em,
 #postlist .pi .xg1,
@@ -551,13 +514,15 @@
 #postlist .pi .authi {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
     font-size: 12px;
 }
 
 #postlist .pi .authi a {
-    color: var(--mint-text-2) !important;
-    font-weight: 550;
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--mint-text) !important;
 }
 
 #postlist .pi .authi a:hover {
@@ -1981,4 +1946,642 @@ input#subject {
 .bm .bm_h .o em.tg_close::before {
     transform: rotate(-45deg);
     top: 5px;
+}
+
+/* ========== 个人资料页 ========== */
+
+.mint-crumb-act {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border: 1px solid var(--mint-line);
+    border-radius: 999px;
+    background: var(--mint-surface);
+    color: var(--mint-text-2) !important;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.mint-crumb-act:hover {
+    border-color: var(--mint-line-strong);
+    color: var(--mint-brand-ink) !important;
+}
+
+/* 空间头部（home/space_menu → #uhd）重绘为资料卡 */
+#ct.mint-prof-page #uhd {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 16px;
+    padding: 24px 24px 0;
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-lg);
+    box-shadow: var(--mint-shadow-sm);
+    box-sizing: border-box;
+}
+
+#ct.mint-prof-page #uhd::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 108px;
+    background: linear-gradient(115deg, var(--mint-brand-soft), transparent 72%);
+    pointer-events: none;
+}
+
+#ct.mint-prof-page #uhd .h,
+#ct.mint-prof-page #uhd .tb,
+#ct.mint-prof-page #uhd .mn {
+    position: relative;
+    z-index: 1;
+}
+
+#ct.mint-prof-page #uhd .h {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    float: none;
+    padding: 0 240px 0 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    min-height: 96px;
+}
+
+#ct.mint-prof-page #uhd .h::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#ct.mint-prof-page #uhd .icn,
+#ct.mint-prof-page #uhd .avt {
+    float: none;
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+#ct.mint-prof-page #uhd .icn img,
+#ct.mint-prof-page #uhd .avt img {
+    display: block;
+    width: 88px !important;
+    height: 88px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--mint-surface-2);
+    box-shadow: 0 0 0 4px var(--mint-surface), 0 0 0 5px var(--mint-line);
+}
+
+#ct.mint-prof-page #uhd .h h2 {
+    margin: 0 0 4px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+    color: var(--mint-text) !important;
+}
+
+#ct.mint-prof-page #uhd .h h2 .xs1,
+#ct.mint-prof-page #uhd .h h2 .xg1 {
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mint-text-3);
+}
+
+#ct.mint-prof-page #uhd .h p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--mint-text-3);
+}
+
+#ct.mint-prof-page #uhd .h p a {
+    color: var(--mint-text-3);
+}
+
+#ct.mint-prof-page #uhd .h p .pipe {
+    margin: 0 6px;
+    color: var(--mint-line-strong);
+}
+
+#ct.mint-prof-page #uhd .mn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 2;
+    float: none;
+}
+
+#ct.mint-prof-page #uhd .mn ul {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#ct.mint-prof-page #uhd .mn li {
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+#ct.mint-prof-page #uhd .mn li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--mint-line);
+    border-radius: 999px;
+    background: var(--mint-surface);
+    color: var(--mint-text-2);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+#ct.mint-prof-page #uhd .mn li a:hover {
+    border-color: var(--mint-line-strong);
+    color: var(--mint-brand-ink);
+}
+
+#ct.mint-prof-page #uhd .mn li.addflw a {
+    border-color: var(--mint-brand);
+    background: var(--mint-brand);
+    color: #fff;
+}
+
+#ct.mint-prof-page #uhd .mn li.addflw a:hover {
+    background: var(--mint-brand-ink);
+}
+
+#ct.mint-prof-page #uhd .tb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    float: none;
+    margin: 18px 0 0 !important;
+    padding: 12px 0 14px !important;
+    list-style: none;
+    background: transparent !important;
+    border: 0;
+    border-top: 1px solid var(--mint-line);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#ct.mint-prof-page #uhd .tb li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+#ct.mint-prof-page #uhd .tb li a {
+    display: block;
+    padding: 7px 14px;
+    border-radius: 999px;
+    color: var(--mint-text-2);
+    font-size: 13px;
+    line-height: 1.3;
+    text-decoration: none;
+}
+
+#ct.mint-prof-page #uhd .tb li.a a,
+#ct.mint-prof-page #uhd .tb li a:hover {
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+}
+
+#ct.mint-prof-page #uhd .tb li.a a {
+    font-weight: 650;
+}
+
+/* 资料卡片网格 */
+.mint-prof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.mint-prof-sec {
+    min-width: 0;
+    padding: 20px 22px;
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-lg);
+    box-shadow: var(--mint-shadow-sm);
+    box-sizing: border-box;
+}
+
+.mint-prof-sec--wide {
+    grid-column: 1 / -1;
+}
+
+.mint-prof-sec-h {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    margin: 0 0 14px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--mint-line);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--mint-text);
+}
+
+.mint-prof-sec-h h2 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+.mint-prof-sec-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mint-text-3);
+}
+
+.mint-prof-note-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+}
+
+.mint-prof-subh {
+    margin: 14px 0 0;
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--mint-text-2);
+}
+
+.mint-prof-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mint-text-3);
+}
+
+.mint-prof-meta strong {
+    font-weight: 600;
+    color: var(--mint-text-2);
+}
+
+.mint-prof-meta a {
+    color: var(--mint-brand-ink);
+}
+
+.mint-prof-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mint-prof-dot::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--mint-text-3);
+}
+
+.mint-prof-dot.is-on::before {
+    background: #22C55E;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, .15);
+}
+
+.mint-prof-ok {
+    color: var(--mint-ok) !important;
+}
+
+/* 数值条 */
+.mint-prof-nums {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.mint-prof-nums li {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    float: none;
+}
+
+.mint-prof-nums li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 12px 6px;
+    border: 1px solid transparent;
+    border-radius: var(--mint-r-md);
+    background: var(--mint-surface-2);
+    text-decoration: none;
+    transition: border-color var(--mint-dur-1) var(--mint-ease), background var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-prof-nums li a:hover {
+    border-color: var(--mint-line-strong);
+    background: var(--mint-hover);
+}
+
+.mint-prof-nums strong {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--mint-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.mint-prof-nums span {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    text-align: center;
+}
+
+/* 字段 / 列表 */
+.mint-prof-fields,
+.mint-prof-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mint-prof-list {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.mint-prof-fields li,
+.mint-prof-list li {
+    display: flex;
+    gap: 12px;
+    min-width: 0;
+    margin: 0;
+    padding: 9px 0;
+    float: none;
+    width: auto;
+    border-bottom: 1px dashed var(--mint-line);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--mint-text);
+}
+
+.mint-prof-fields li:last-child,
+.mint-prof-list li:last-child {
+    border-bottom: 0;
+}
+
+.mint-prof-fields li em,
+.mint-prof-list li em {
+    flex: 0 0 88px;
+    min-width: 0;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--mint-text-3);
+}
+
+.mint-prof-val,
+.mint-prof-list li > span,
+.mint-prof-list li > strong {
+    min-width: 0;
+    word-break: break-word;
+}
+
+.mint-prof-list li > strong,
+.mint-prof-credit strong {
+    font-variant-numeric: tabular-nums;
+    font-weight: 650;
+}
+
+.mint-prof-unit,
+.mint-prof-hint {
+    font-size: 12px;
+    color: var(--mint-text-3);
+}
+
+.mint-prof-hint {
+    margin-left: 6px;
+}
+
+.mint-prof-list img.vm {
+    vertical-align: middle;
+}
+
+/* 备注 / 签名 */
+.mint-prof-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--mint-line);
+}
+
+.mint-prof-note em {
+    display: block;
+    margin-bottom: 4px;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--mint-text-3);
+}
+
+.mint-prof-note p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mint-text-2);
+}
+
+.mint-prof-sign {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--mint-text-2);
+    word-break: break-word;
+}
+
+/* 勋章 / 认证 */
+.mint-prof-medals,
+.mint-prof-verify {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mint-prof-verify {
+    margin-top: 14px;
+}
+
+.mint-prof-medal,
+.mint-prof-vitem {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px 7px 8px;
+    border: 1px solid var(--mint-line);
+    border-radius: 999px;
+    background: var(--mint-surface-2);
+    text-decoration: none;
+}
+
+.mint-prof-medal img,
+.mint-prof-vitem img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.mint-prof-medal span,
+.mint-prof-vitem {
+    font-size: 12.5px;
+    color: var(--mint-text-2);
+}
+
+.mint-prof-vitem.is-off {
+    opacity: .5;
+}
+
+/* 版块 / 群组标签 */
+.mint-prof-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mint-prof-tags--group {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--mint-line);
+}
+
+.mint-prof-tags a {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--mint-hover);
+    color: var(--mint-text-2);
+    font-size: 12.5px;
+    text-decoration: none;
+}
+
+.mint-prof-tags a:hover {
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+}
+
+/* 违规记录 */
+.mint-prof-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mint-prof-table th,
+.mint-prof-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--mint-line);
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.mint-prof-table th {
+    background: var(--mint-surface-2);
+    color: var(--mint-text-3);
+    font-weight: 600;
+}
+
+/* 资料页响应式 */
+@media (max-width: 980px) {
+    .mint-prof {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mint-prof-sec--wide {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 760px) {
+    #ct.mint-prof-page #uhd {
+        padding: 20px 16px 0;
+    }
+
+    #ct.mint-prof-page #uhd .h {
+        display: block;
+        padding: 0;
+        min-height: 0;
+    }
+
+    #ct.mint-prof-page #uhd .icn {
+        display: block;
+        margin-bottom: 14px;
+    }
+
+    #ct.mint-prof-page #uhd .icn img {
+        width: 72px !important;
+        height: 72px !important;
+    }
+
+    #ct.mint-prof-page #uhd .h h2 {
+        font-size: 21px;
+    }
+
+    #ct.mint-prof-page #uhd .mn {
+        position: static;
+        margin-top: 14px;
+    }
+
+    #ct.mint-prof-page #uhd .mn ul {
+        flex-wrap: wrap;
+    }
+
+    #ct.mint-prof-page #uhd .tb {
+        margin-top: 14px !important;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .mint-prof-sec {
+        padding: 18px 16px;
+    }
+
+    .mint-prof-nums {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mint-prof-fields {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .mint-prof-meta {
+        margin-left: 0;
+        width: 100%;
+    }
 }

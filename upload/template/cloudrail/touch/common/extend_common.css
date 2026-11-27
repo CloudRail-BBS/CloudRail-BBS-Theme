@@ -24,7 +24,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    html[data-mint-theme="auto"] {
         --mint-brand-ink: #2563EB;
         --mint-brand-soft: #16273F;
         --mint-bg: #0A0F1A;

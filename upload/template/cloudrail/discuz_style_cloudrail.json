@@ -70,7 +70,7 @@
         "description": "用于按钮、链接高亮、选中态",
         "variable": "mint_brand",
         "type": "color",
-        "value": "#61CAB8",
+        "value": "#2563EB",
         "extra": ""
       },
       "mint_bg": {
@@ -79,7 +79,7 @@
         "description": "浅色模式下的页面背景",
         "variable": "mint_bg",
         "type": "color",
-        "value": "#FAFAF9",
+        "value": "#F6F8FB",
         "extra": ""
       },
       "mint_radius": {
