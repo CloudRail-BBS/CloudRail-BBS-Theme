@@ -52,7 +52,7 @@
 }
 
 html[data-mint-theme="dark"] {
-    --mint-brand-ink: #2563EB;
+    --mint-brand-ink: #3B82F6;
     --mint-brand-soft: #16273F;
 
     --mint-bg: #0A0F1A;
@@ -76,7 +76,7 @@ html[data-mint-theme="dark"] {
 
 @media (prefers-color-scheme: dark) {
     html[data-mint-theme="auto"] {
-        --mint-brand-ink: #2563EB;
+        --mint-brand-ink: #3B82F6;
         --mint-brand-soft: #16273F;
         --mint-bg: #0A0F1A;
         --mint-surface: #111826;
@@ -129,6 +129,11 @@ a:hover {
 ::selection {
     background: var(--mint-brand);
     color: #FFFFFF;
+}
+
+/* 键盘焦点不被固定顶栏遮挡（WCAG 2.2 Focus Not Obscured） */
+html {
+    scroll-padding-top: calc(var(--mint-top-h, 64px) + 16px);
 }
 
 :focus-visible {
@@ -691,6 +696,34 @@ img {
     color: var(--mint-brand-ink);
     font-size: 13px;
     font-weight: 700;
+}
+
+/* 右栏快捷入口：SVG 图标（无 emoji / 无文字符号） */
+.mint-row-ico[data-icon] {
+    position: relative;
+    overflow: hidden;
+}
+
+.mint-row-ico[data-icon]::before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: var(--mint-brand-ink);
+    -webkit-mask: var(--mint-ico) center / contain no-repeat;
+    mask: var(--mint-ico) center / contain no-repeat;
+}
+
+.mint-row-ico[data-icon="edit"] {
+    --mint-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z'/%3E%3C/svg%3E");
+}
+
+.mint-row-ico[data-icon="list"] {
+    --mint-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'/%3E%3C/svg%3E");
+}
+
+.mint-row-ico[data-icon="star"] {
+    --mint-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z'/%3E%3C/svg%3E");
 }
 
 .mint-row-body {
@@ -2057,7 +2090,8 @@ html[data-mint-theme="dark"] .mint-card-pop {
 #fastpostform textarea:focus,
 #fastpostmessage:focus {
     outline: none;
-    box-shadow: none;
+    border-color: var(--mint-brand);
+    box-shadow: 0 0 0 3px var(--mint-brand-ring);
 }
 
 #fastpostform .pn,
@@ -3930,5 +3964,153 @@ input#subject {
     .mint-prof-meta {
         margin-left: 0;
         width: 100%;
+    }
+}
+
+/* ============================================================
+ * 系统提示页（common/showmessage：#main_message / #main_succeed）
+ * 游客访问受限内容、操作成功/失败等提示统一为居中卡片
+ * ============================================================ */
+
+#ct #main_message,
+#ct #main_succeed {
+    float: none !important;
+    width: auto !important;
+    max-width: 620px !important;
+    margin: 72px auto 96px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+}
+
+#main_message .f_c,
+#main_succeed .f_c {
+    padding: 40px 44px !important;
+    margin: 0 !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-lg) !important;
+    background: var(--mint-surface) !important;
+    box-shadow: 0 12px 40px -12px rgba(15, 23, 42, .12), 0 0 0 1px rgba(15, 23, 42, .02) !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+}
+
+html[data-mint-theme="dark"] #main_message .f_c,
+html[data-mint-theme="dark"] #main_succeed .f_c {
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .04) !important;
+}
+
+#messagetext.alert_info,
+#messagetext.alert_error,
+#main_succeed .alert_right {
+    display: block !important;
+    margin: 0 0 20px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--mint-text) !important;
+    font-size: 17px !important;
+    font-weight: 650 !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    box-shadow: none !important;
+}
+
+/* 提示图标：蓝色圆底 + 锁形（默认提示为「需登录」） */
+#messagetext.alert_info::before,
+#messagetext.alert_error::before,
+#main_succeed .alert_right::before {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background-color: var(--mint-brand-soft);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
+    background-size: 26px 26px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#messagetext.alert_error::before {
+    background-color: rgba(239, 68, 68, .1);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EF4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v5M12 16h.01'/%3E%3C/svg%3E");
+}
+
+#main_succeed .alert_right::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+#messagetext.alert_info p,
+#messagetext.alert_error p,
+#main_succeed .alert_right p {
+    margin: 0;
+}
+
+#messagelogin {
+    margin: 24px -44px -40px !important;
+    padding: 22px 44px 28px !important;
+    border-top: 1px solid var(--mint-line) !important;
+    background: var(--mint-surface-2) !important;
+    color: var(--mint-text-3) !important;
+    font-size: 13px !important;
+    text-align: center !important;
+    line-height: 1.6 !important;
+}
+
+/* AJAX 加载中的「请稍候……」 */
+#messagelogin:not(:has(.f_c)):not(:has(.rfm))::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+    vertical-align: -2px;
+    border: 2px solid var(--mint-line-strong);
+    border-top-color: var(--mint-brand);
+    border-radius: 50%;
+    animation: mint-spin .7s linear infinite;
+}
+
+@keyframes mint-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 登录框嵌入提示卡后，去掉弹窗自身的边框/阴影，避免双层卡片 */
+#messagelogin .f_c,
+#messagelogin .f_win {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+#messagelogin .f_c .c,
+#messagelogin .f_win .c {
+    padding: 0 !important;
+}
+
+/* 无登录框时（纯提示），底部留白收窄 */
+#main_message .f_c:has(#messagelogin:empty),
+#main_succeed .f_c:not(:has(#messagelogin)) {
+    padding-bottom: 40px !important;
+}
+
+@media (max-width: 760px) {
+    #ct #main_message,
+    #ct #main_succeed {
+        margin: 32px 12px 48px !important;
+    }
+    #main_message .f_c,
+    #main_succeed .f_c {
+        padding: 28px 20px !important;
+    }
+    #messagelogin {
+        margin: 20px -20px -28px !important;
+        padding: 18px 20px 22px !important;
     }
 }

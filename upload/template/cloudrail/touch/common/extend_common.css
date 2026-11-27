@@ -25,7 +25,7 @@
 
 @media (prefers-color-scheme: dark) {
     html[data-mint-theme="auto"] {
-        --mint-brand-ink: #2563EB;
+        --mint-brand-ink: #3B82F6;
         --mint-brand-soft: #16273F;
         --mint-bg: #0A0F1A;
         --mint-surface: #111826;
@@ -290,7 +290,7 @@ textarea:focus {
 /* ========== 手动深色（与 PC 共用 localStorage 键） ========== */
 
 html[data-mint-theme="dark"] {
-    --mint-brand-ink: #2563EB;
+    --mint-brand-ink: #3B82F6;
     --mint-brand-soft: #16273F;
     --mint-bg: #0A0F1A;
     --mint-surface: #111826;
