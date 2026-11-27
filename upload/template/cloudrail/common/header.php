@@ -45,7 +45,8 @@
 
 			<!--{if $_G['uid']}-->
 			<a class="mint-side-card" href="home.php?mod=space&uid=$_G[uid]">
-				<h4>{$_G['member']['username']}<span class="mint-tag">{lang setting}</span></h4>
+				<img class="_avt" data-uid="$_G[uid]" data-size="small" alt="{$_G['member']['username']}" />
+				<h4><span class="mint-side-card-name">{$_G['member']['username']}</span><span class="mint-tag">{lang setting}</span></h4>
 				<p>{lang my_nav} · UID $_G[uid]</p>
 			</a>
 			<!--{/if}-->

@@ -1084,6 +1084,26 @@ pre {
     letter-spacing: -.01em;
 }
 
+.mint-stat-welcome {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--mint-line);
+    font-size: 12px;
+    color: var(--mint-text-3);
+    line-height: 1.6;
+}
+
+.mint-stat-welcome a {
+    margin-left: 4px;
+    color: var(--mint-brand-ink) !important;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.mint-stat-welcome a:hover {
+    text-decoration: underline;
+}
+
 .mint-online {
     display: flex;
     align-items: center;
@@ -3350,7 +3370,7 @@ input#subject {
 }
 
 /* 空间头部（home/space_menu → #uhd）重绘为资料卡 */
-#ct.mint-prof-page #uhd {
+#ct.mint-page #uhd {
     position: relative;
     overflow: hidden;
     margin: 0 0 16px;
@@ -3362,7 +3382,7 @@ input#subject {
     box-sizing: border-box;
 }
 
-#ct.mint-prof-page #uhd::before {
+#ct.mint-page #uhd::before {
     content: "";
     position: absolute;
     inset: 0 0 auto;
@@ -3371,14 +3391,14 @@ input#subject {
     pointer-events: none;
 }
 
-#ct.mint-prof-page #uhd .h,
-#ct.mint-prof-page #uhd .tb,
-#ct.mint-prof-page #uhd .mn {
+#ct.mint-page #uhd .h,
+#ct.mint-page #uhd .tb,
+#ct.mint-page #uhd .mn {
     position: relative;
     z-index: 1;
 }
 
-#ct.mint-prof-page #uhd .h {
+#ct.mint-page #uhd .h {
     display: flex;
     align-items: center;
     gap: 18px;
@@ -3390,14 +3410,14 @@ input#subject {
     min-height: 96px;
 }
 
-#ct.mint-prof-page #uhd .h::after {
+#ct.mint-page #uhd .h::after {
     content: "";
     display: table;
     clear: both;
 }
 
-#ct.mint-prof-page #uhd .icn,
-#ct.mint-prof-page #uhd .avt {
+#ct.mint-page #uhd .icn,
+#ct.mint-page #uhd .avt {
     float: none;
     flex: 0 0 auto;
     width: auto;
@@ -3408,8 +3428,8 @@ input#subject {
     background: transparent;
 }
 
-#ct.mint-prof-page #uhd .icn img,
-#ct.mint-prof-page #uhd .avt img {
+#ct.mint-page #uhd .icn img,
+#ct.mint-page #uhd .avt img {
     display: block;
     width: 88px !important;
     height: 88px !important;
@@ -3419,7 +3439,7 @@ input#subject {
     box-shadow: 0 0 0 4px var(--mint-surface), 0 0 0 5px var(--mint-line);
 }
 
-#ct.mint-prof-page #uhd .h h2 {
+#ct.mint-page #uhd .h h2 {
     margin: 0 0 4px;
     font-size: 24px;
     font-weight: 700;
@@ -3428,30 +3448,30 @@ input#subject {
     color: var(--mint-text) !important;
 }
 
-#ct.mint-prof-page #uhd .h h2 .xs1,
-#ct.mint-prof-page #uhd .h h2 .xg1 {
+#ct.mint-page #uhd .h h2 .xs1,
+#ct.mint-page #uhd .h h2 .xg1 {
     margin-left: 8px;
     font-size: 12px;
     font-weight: 400;
     color: var(--mint-text-3);
 }
 
-#ct.mint-prof-page #uhd .h p {
+#ct.mint-page #uhd .h p {
     margin: 0;
     font-size: 12.5px;
     color: var(--mint-text-3);
 }
 
-#ct.mint-prof-page #uhd .h p a {
+#ct.mint-page #uhd .h p a {
     color: var(--mint-text-3);
 }
 
-#ct.mint-prof-page #uhd .h p .pipe {
+#ct.mint-page #uhd .h p .pipe {
     margin: 0 6px;
     color: var(--mint-line-strong);
 }
 
-#ct.mint-prof-page #uhd .mn {
+#ct.mint-page #uhd .mn {
     position: absolute;
     top: 24px;
     right: 24px;
@@ -3459,7 +3479,7 @@ input#subject {
     float: none;
 }
 
-#ct.mint-prof-page #uhd .mn ul {
+#ct.mint-page #uhd .mn ul {
     display: flex;
     gap: 8px;
     margin: 0;
@@ -3467,13 +3487,13 @@ input#subject {
     list-style: none;
 }
 
-#ct.mint-prof-page #uhd .mn li {
+#ct.mint-page #uhd .mn li {
     float: none;
     margin: 0;
     padding: 0;
 }
 
-#ct.mint-prof-page #uhd .mn li a {
+#ct.mint-page #uhd .mn li a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3490,22 +3510,22 @@ input#subject {
     white-space: nowrap;
 }
 
-#ct.mint-prof-page #uhd .mn li a:hover {
+#ct.mint-page #uhd .mn li a:hover {
     border-color: var(--mint-line-strong);
     color: var(--mint-brand-ink);
 }
 
-#ct.mint-prof-page #uhd .mn li.addflw a {
+#ct.mint-page #uhd .mn li.addflw a {
     border-color: var(--mint-brand);
     background: var(--mint-brand);
     color: #fff;
 }
 
-#ct.mint-prof-page #uhd .mn li.addflw a:hover {
+#ct.mint-page #uhd .mn li.addflw a:hover {
     background: var(--mint-brand-ink);
 }
 
-#ct.mint-prof-page #uhd .tb {
+#ct.mint-page #uhd .tb {
     display: flex;
     flex-wrap: wrap;
     gap: 2px;
@@ -3520,7 +3540,7 @@ input#subject {
     box-shadow: none;
 }
 
-#ct.mint-prof-page #uhd .tb li {
+#ct.mint-page #uhd .tb li {
     float: none;
     margin: 0;
     padding: 0;
@@ -3528,7 +3548,7 @@ input#subject {
     background: transparent;
 }
 
-#ct.mint-prof-page #uhd .tb li a {
+#ct.mint-page #uhd .tb li a {
     display: block;
     padding: 7px 14px;
     border-radius: 999px;
@@ -3538,13 +3558,13 @@ input#subject {
     text-decoration: none;
 }
 
-#ct.mint-prof-page #uhd .tb li.a a,
-#ct.mint-prof-page #uhd .tb li a:hover {
+#ct.mint-page #uhd .tb li.a a,
+#ct.mint-page #uhd .tb li a:hover {
     background: var(--mint-brand-soft);
     color: var(--mint-brand-ink);
 }
 
-#ct.mint-prof-page #uhd .tb li.a a {
+#ct.mint-page #uhd .tb li.a a {
     font-weight: 650;
 }
 
@@ -3909,40 +3929,40 @@ input#subject {
 }
 
 @media (max-width: 760px) {
-    #ct.mint-prof-page #uhd {
+    #ct.mint-page #uhd {
         padding: 20px 16px 0;
     }
 
-    #ct.mint-prof-page #uhd .h {
+    #ct.mint-page #uhd .h {
         display: block;
         padding: 0;
         min-height: 0;
     }
 
-    #ct.mint-prof-page #uhd .icn {
+    #ct.mint-page #uhd .icn {
         display: block;
         margin-bottom: 14px;
     }
 
-    #ct.mint-prof-page #uhd .icn img {
+    #ct.mint-page #uhd .icn img {
         width: 72px !important;
         height: 72px !important;
     }
 
-    #ct.mint-prof-page #uhd .h h2 {
+    #ct.mint-page #uhd .h h2 {
         font-size: 21px;
     }
 
-    #ct.mint-prof-page #uhd .mn {
+    #ct.mint-page #uhd .mn {
         position: static;
         margin-top: 14px;
     }
 
-    #ct.mint-prof-page #uhd .mn ul {
+    #ct.mint-page #uhd .mn ul {
         flex-wrap: wrap;
     }
 
-    #ct.mint-prof-page #uhd .tb {
+    #ct.mint-page #uhd .tb {
         margin-top: 14px !important;
         overflow-x: auto;
         flex-wrap: nowrap;
@@ -4056,8 +4076,13 @@ html[data-mint-theme="dark"] #main_succeed .f_c {
     background: var(--mint-surface-2) !important;
     color: var(--mint-text-3) !important;
     font-size: 13px !important;
-    text-align: center !important;
+    text-align: left !important;
     line-height: 1.6 !important;
+}
+
+/* 纯文字加载态才居中 */
+#messagelogin:not(:has([id^="layer_login_"])):not(:has([id^="layer_lostpw_"])) {
+    text-align: center !important;
 }
 
 /* AJAX 加载中的「请稍候……」 */
@@ -4112,5 +4137,651 @@ html[data-mint-theme="dark"] #main_succeed .f_c {
     #messagelogin {
         margin: 20px -20px -28px !important;
         padding: 18px 20px 22px !important;
+    }
+}
+
+/* ============================================================
+ * 个人空间头部在中等屏幕（侧栏收窄后）的适配
+ * 右侧操作按钮改为流式排布，避免 padding-right 挤压文字
+ * ============================================================ */
+@media (min-width: 761px) and (max-width: 1100px) {
+    #ct.mint-page #uhd .h {
+        display: block !important;
+        padding: 0 !important;
+        min-height: 0;
+    }
+
+    #ct.mint-page #uhd .icn {
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    #ct.mint-page #uhd .mn {
+        position: static;
+        margin-top: 12px;
+    }
+
+    #ct.mint-page #uhd .mn ul {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================
+ * 浮动登录 / 注册 / 找回密码表单（infloat=yes，注入到 #messagelogin）
+ * 这些表单不在 #ct.mint-auth 内，需要独立命中
+ * ============================================================ */
+#messagelogin [id^="layer_login_"],
+#messagelogin [id^="layer_lostpw_"],
+#main_messaqge [id^="layer_login_"],
+#main_messaqge [id^="layer_lostpw_"] {
+    background: var(--mint-surface) !important;
+    border-radius: var(--mint-r-lg) !important;
+    overflow: hidden;
+}
+
+#messagelogin .flb,
+#main_messaqge .flb {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 !important;
+    padding: 16px 20px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--mint-line) !important;
+    background: var(--mint-surface-2) !important;
+    font-size: 15px !important;
+    font-weight: 650 !important;
+    color: var(--mint-text) !important;
+}
+
+#messagelogin .flb em,
+#main_messaqge .flb em {
+    font-style: normal;
+}
+
+#messagelogin form.cl > .c,
+#main_messaqge form.cl > .c {
+    padding: 20px !important;
+}
+
+#messagelogin .rfm,
+#main_messaqge .rfm {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+#messagelogin .rfm table,
+#main_messaqge .rfm table {
+    width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+#messagelogin .rfm tr,
+#main_messaqge .rfm tr {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+#messagelogin .rfm th,
+#main_messaqge .rfm th {
+    float: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--mint-text-2) !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+}
+
+#messagelogin .rfm th label,
+#main_messaqge .rfm th label {
+    color: var(--mint-text-2) !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+}
+
+#messagelogin .rfm td,
+#main_messaqge .rfm td {
+    float: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    vertical-align: top !important;
+}
+
+#messagelogin .rfm .px,
+#messagelogin .rfm select,
+#main_messaqge .rfm .px,
+#main_messaqge .rfm select {
+    display: block;
+    width: 100% !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-md) !important;
+    background: var(--mint-surface) !important;
+    color: var(--mint-text) !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+}
+
+#messagelogin .rfm .px:focus,
+#messagelogin .rfm select:focus,
+#main_messaqge .rfm .px:focus,
+#main_messaqge .rfm select:focus {
+    border-color: var(--mint-brand) !important;
+    box-shadow: 0 0 0 3px var(--mint-brand-ring) !important;
+    outline: none;
+}
+
+#messagelogin .rfm td.tipcol,
+#main_messaqge .rfm td.tipcol {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 4px;
+    padding: 0 !important;
+    text-align: right !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+}
+
+#messagelogin .rfm td.tipcol a,
+#main_messaqge .rfm td.tipcol a {
+    color: var(--mint-brand-ink) !important;
+    font-weight: 500;
+}
+
+#messagelogin .rfm .login_slct,
+#main_messaqge .rfm .login_slct {
+    display: block;
+    width: 100%;
+}
+
+#messagelogin .rfm .login_slct select,
+#main_messaqge .rfm .login_slct select {
+    float: none !important;
+    width: 100% !important;
+}
+
+#messagelogin .rfm .pc,
+#main_messaqge .rfm .pc {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 6px 0 0 !important;
+    vertical-align: -3px;
+    accent-color: var(--mint-brand);
+}
+
+#messagelogin .rfm label,
+#main_messaqge .rfm label {
+    color: var(--mint-text-2) !important;
+    font-size: 13px !important;
+}
+
+#messagelogin .rfm .pn,
+#main_messaqge .rfm .pn {
+    display: block !important;
+    width: 100% !important;
+    height: 46px !important;
+    margin: 4px 0 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: var(--mint-r-md) !important;
+    background: var(--mint-brand) !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 650 !important;
+    line-height: 46px !important;
+    text-align: center !important;
+    cursor: pointer;
+}
+
+#messagelogin .rfm .pn:hover,
+#main_messaqge .rfm .pn:hover {
+    background: var(--mint-brand-ink) !important;
+}
+
+#messagelogin .rfm .pn strong,
+#main_messaqge .rfm .pn strong {
+    font-weight: inherit;
+}
+
+/* 验证码图片 */
+#messagelogin .rfm img,
+#main_messaqge .rfm img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--mint-r-sm);
+}
+
+/* ============================================================
+ * 导读 / 热门页（forum.php?mod=guide）
+ * 参考 klpbbs：单列行式卡片，头像+作者+版块+时间 / 标题 / 数据
+ * ============================================================ */
+
+#ct.mint-guide-page #pt {
+    margin-bottom: 16px;
+}
+
+#ct.mint-guide-page .boardnav {
+    display: block;
+}
+
+/* 导航标签栏：最新 / 热门 / 精华 */
+#ct.mint-guide-page .bm_h {
+    padding: 0 !important;
+    margin: 0 0 16px !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-box) !important;
+    background: var(--mint-surface) !important;
+    overflow: hidden;
+}
+
+#ct.mint-guide-page .bm_h h2 {
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--mint-text);
+}
+
+#ct.mint-guide-page .bm_h .ptn {
+    padding: 0 20px 16px;
+    color: var(--mint-text-3);
+    font-size: 12.5px;
+}
+
+/* 视图切换导航 */
+#ct.mint-guide-page #guide_nav,
+#ct.mint-guide-page .bm_h ul,
+#ct.mint-guide-page .viewnav {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 !important;
+    padding: 8px 12px !important;
+    list-style: none;
+    border-top: 1px solid var(--mint-line);
+    background: var(--mint-surface-2) !important;
+}
+
+#ct.mint-guide-page #guide_nav li,
+#ct.mint-guide-page .bm_h ul li,
+#ct.mint-guide-page .viewnav li {
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#ct.mint-guide-page #guide_nav li a,
+#ct.mint-guide-page .bm_h ul li a,
+#ct.mint-guide-page .viewnav li a {
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 14px !important;
+    border-radius: var(--mint-r-sm);
+    color: var(--mint-text-2) !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background var(--mint-dur-2) var(--mint-ease), color var(--mint-dur-2) var(--mint-ease);
+}
+
+#ct.mint-guide-page #guide_nav li a:hover,
+#ct.mint-guide-page .bm_h ul li a:hover,
+#ct.mint-guide-page .viewnav li a:hover {
+    background: var(--mint-hover);
+    color: var(--mint-brand-ink) !important;
+}
+
+/* 当前视图高亮：Discuz 用 $currentview[hot] 输出 class="a" */
+#ct.mint-guide-page #guide_nav li.a a,
+#ct.mint-guide-page .bm_h ul li.a a,
+#ct.mint-guide-page .viewnav li.a a {
+    background: var(--mint-brand) !important;
+    color: #fff !important;
+}
+
+/* 列表容器 */
+#ct.mint-guide-page #threadlist {
+    border: 0 !important;
+    background: transparent !important;
+}
+
+#ct.mint-guide-page #threadlist .th {
+    display: none !important;
+}
+
+#ct.mint-guide-page #threadlist > table,
+#ct.mint-guide-page #threadlist table {
+    width: 100% !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+/* 每条主题 → 卡片行 */
+#ct.mint-guide-page #threadlist tbody[id^="post_"],
+#ct.mint-guide-page #threadlist tbody[id^="thread_"],
+#ct.mint-guide-page #threadlist tbody:has(.xst) {
+    display: block !important;
+    position: relative;
+    margin: 0 0 10px !important;
+    padding: 16px 18px !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-box) !important;
+    background: var(--mint-surface) !important;
+    box-shadow: var(--mint-shadow-sm) !important;
+    transition: border-color var(--mint-dur-2) var(--mint-ease), box-shadow var(--mint-dur-2) var(--mint-ease);
+}
+
+#ct.mint-guide-page #threadlist tbody[id^="post_"]:hover,
+#ct.mint-guide-page #threadlist tbody[id^="thread_"]:hover,
+#ct.mint-guide-page #threadlist tbody:has(.xst):hover {
+    border-color: var(--mint-line-strong) !important;
+    box-shadow: var(--mint-shadow-hover) !important;
+}
+
+#ct.mint-guide-page #threadlist tbody > tr {
+    display: block !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+/* 图标单元格 → 隐藏（用标题前的 SVG 代替） */
+#ct.mint-guide-page #threadlist td.icn {
+    display: none !important;
+}
+
+/* 标题单元格 */
+#ct.mint-guide-page #threadlist th {
+    display: block !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    font-weight: 400 !important;
+    text-align: left !important;
+}
+
+#ct.mint-guide-page #threadlist th .xst {
+    display: block;
+    color: var(--mint-text) !important;
+    font-size: 15px !important;
+    font-weight: 650 !important;
+    line-height: 1.5 !important;
+    text-decoration: none;
+}
+
+#ct.mint-guide-page #threadlist th .xst:hover {
+    color: var(--mint-brand-ink) !important;
+}
+
+/* 热度标签 */
+#ct.mint-guide-page #threadlist th .xi1 {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink) !important;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* 数据行：版块 / 作者 / 回复浏览 / 最后回复 */
+#ct.mint-guide-page #threadlist td.by,
+#ct.mint-guide-page #threadlist td.num {
+    display: inline-block !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 12px 0 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--mint-text-3) !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+    white-space: nowrap;
+}
+
+#ct.mint-guide-page #threadlist td.by::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 0 8px 2px 0;
+    border-radius: 50%;
+    background: var(--mint-line-strong);
+}
+
+#ct.mint-guide-page #threadlist td.by:first-of-type::before {
+    display: none;
+}
+
+#ct.mint-guide-page #threadlist td.by a,
+#ct.mint-guide-page #threadlist td.num a {
+    color: var(--mint-text-2) !important;
+    text-decoration: none;
+}
+
+#ct.mint-guide-page #threadlist td.by a:hover,
+#ct.mint-guide-page #threadlist td.num a:hover {
+    color: var(--mint-brand-ink) !important;
+}
+
+#ct.mint-guide-page #threadlist td.num a {
+    font-weight: 650;
+    color: var(--mint-brand-ink) !important;
+}
+
+#ct.mint-guide-page #threadlist td.num em {
+    margin-left: 4px;
+    font-style: normal;
+}
+
+/* 摘要 / 评论行 */
+#ct.mint-guide-page #threadlist td[colspan] {
+    display: block !important;
+    margin: 8px 0 0 !important;
+    padding: 10px 12px !important;
+    border: 0 !important;
+    border-radius: var(--mint-r-sm) !important;
+    background: var(--mint-surface-2) !important;
+    color: var(--mint-text-3) !important;
+    font-size: 12.5px !important;
+    line-height: 1.6 !important;
+    white-space: normal !important;
+}
+
+/* 侧栏热门区块（bm bml pbn） */
+#ct.mint-guide-page .bm.bml {
+    margin: 0 0 16px !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-box) !important;
+    background: var(--mint-surface) !important;
+    overflow: hidden;
+}
+
+#ct.mint-guide-page .bm.bml .bm_h {
+    margin: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--mint-line) !important;
+    border-radius: 0 !important;
+}
+
+#ct.mint-guide-page .xl2 li {
+    width: auto !important;
+    float: none !important;
+    padding: 8px 20px !important;
+    border-bottom: 1px solid var(--mint-line);
+}
+
+#ct.mint-guide-page .xl2 li:last-child {
+    border-bottom: 0;
+}
+
+@media (max-width: 760px) {
+    #ct.mint-guide-page #threadlist tbody[id^="post_"],
+    #ct.mint-guide-page #threadlist tbody[id^="thread_"],
+    #ct.mint-guide-page #threadlist tbody:has(.xst) {
+        padding: 14px !important;
+    }
+    #ct.mint-guide-page #threadlist td.by,
+    #ct.mint-guide-page #threadlist td.num {
+        display: block !important;
+        margin: 0 0 4px !important;
+    }
+}
+
+/* ============================================================
+ * 侧边栏精修（参考 klpbbs：清晰分组 + 明确当前项 + 用户卡）
+ * ============================================================ */
+
+/* 品牌区底部细分隔 */
+.mint-brand {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.mint-brand::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 0;
+    height: 1px;
+    background: var(--mint-line);
+}
+
+/* 分组标题（插件区） */
+.mint-nav-label {
+    display: block;
+    margin: 20px 8px 8px;
+    padding: 0;
+    color: var(--mint-text-3);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+/* 当前项左侧指示条 */
+.mint-nav li.mint-on > a {
+    position: relative;
+}
+
+.mint-nav li.mint-on > a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 18px;
+    margin-top: -9px;
+    border-radius: 0 3px 3px 0;
+    background: var(--mint-brand);
+}
+
+/* 导航项按视图形状微调 */
+.mint-nav li > a {
+    position: relative;
+    height: 40px;
+}
+
+.mint-nav li > a:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text) !important;
+}
+
+/* 用户卡：头像 + 名称 + UID */
+.mint-side-card {
+    position: relative;
+    margin-top: 22px;
+    padding: 14px 14px 14px 58px;
+    min-height: 58px;
+    transition: border-color var(--mint-dur-2) var(--mint-ease), background var(--mint-dur-2) var(--mint-ease);
+}
+
+.mint-side-card:hover {
+    border-color: var(--mint-line-strong);
+    background: var(--mint-hover);
+}
+
+.mint-side-card::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--mint-brand-soft);
+    box-shadow: 0 0 0 2px var(--mint-surface), 0 0 0 3px var(--mint-line);
+}
+
+/* 用户卡头像：优先用 X5 的 _avt 接口注入（若有） */
+.mint-side-card .mint-avatar,
+.mint-side-card img._avt {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.mint-side-card h4 {
+    gap: 6px;
+    font-size: 13.5px;
+    line-height: 1.4;
+}
+
+.mint-side-card p {
+    font-size: 11.5px;
+}
+
+/* 侧栏滚动条细化 */
+#mint-side::-webkit-scrollbar {
+    width: 6px;
+}
+
+#mint-side::-webkit-scrollbar-thumb {
+    background: var(--mint-line-strong);
+    border-radius: 3px;
+}
+
+#mint-side::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+@media (max-width: 1100px) {
+    .mint-side-card {
+        padding: 10px;
+        min-height: 0;
+    }
+
+    .mint-side-card::before,
+    .mint-side-card .mint-avatar,
+    .mint-side-card img._avt {
+        display: none;
     }
 }
