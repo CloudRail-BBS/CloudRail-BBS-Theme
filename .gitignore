@@ -3,3 +3,6 @@ upload/template/mint/
 preview/_sim*.html
 .audit_tmp/
 .refsrc/
+*.bak
+tree*.json
+preview/_sim*.png
