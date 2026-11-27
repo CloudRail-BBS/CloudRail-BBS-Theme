@@ -525,6 +525,21 @@ html[data-mint-theme="dark"] #mint-m-drawer {
     font-weight: 500;
 }
 
+.mint-m-dr-native > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.mint-m-dr-native > a span {
+    font-size: 12px;
+    opacity: .6;
+}
+
 .mint-m-dr-item svg {
     width: 18px;
     height: 18px;

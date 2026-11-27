@@ -74,10 +74,7 @@
 		</a>
 		<!--{loop $_G['setting']['navs'] $nav}-->
 			<!--{if is_array($nav) && $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->
-				<a href="$nav[filename]" class="mint-m-dr-item">
-					<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v7M8.5 12h7"/></svg>
-					<span>$nav[name]</span>
-				</a>
+				<div class="mint-m-dr-item mint-m-dr-native">$nav[nav]</div>
 			<!--{/if}-->
 		<!--{/loop}-->
 	</nav>
