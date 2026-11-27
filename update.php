@@ -82,7 +82,8 @@ function rcopy(string $src, string $dst): int
     return $n;
 }
 
-$localVersion = is_file($VERSION_FILE) ? trim((string)file_get_contents(VERSION_FILE)) : '0.0.0';
+$versionPath  = $root . '/' . VERSION_FILE;
+$localVersion = is_file($versionPath) ? trim((string)file_get_contents($versionPath)) : '0.0.0';
 $remoteJson   = fetch($rawBase . '/version.json');
 $remote       = $remoteJson ? json_decode($remoteJson, true) : null;
 
