@@ -1,0 +1,17 @@
+<script type="text/javascript">
+(function () {
+    var KEY = 'mint_theme';
+    var root = document.documentElement;
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    root.setAttribute('data-mint-theme', saved || 'light');
+})();
+</script>
+<style type="text/css">
+/* 首屏防闪：在 CSS 缓存加载前先铺底色 */
+html { background: #FAFAF9; }
+html[data-mint-theme="dark"] { background: #0B0D0D; }
+@media (prefers-color-scheme: dark) {
+    html[data-mint-theme="auto"] { background: #0B0D0D; }
+}
+</style>

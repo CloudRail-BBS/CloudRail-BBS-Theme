@@ -1,0 +1,609 @@
+/*
+ * Mint for Discuz! X5.0 — 手机端样式层
+ * 路径：template/mint/touch/common/extend_common.css
+ * 手机端不重构布局骨架，只统一色彩、圆角、字体与卡片观感
+ */
+
+:root {
+    --mint-brand: #2563EB;
+    --mint-brand-ink: #1D4ED8;
+    --mint-brand-soft: #E8F0FE;
+    --mint-bg: #F6F8FB;
+    --mint-surface: #FFFFFF;
+    --mint-text: #0F172A;
+    --mint-text-2: #475569;
+    --mint-text-3: #64748B;
+    --mint-line: #E5EAF1;
+    --mint-hover: #F1F4F9;
+    --mint-r-sm: 8px;
+    --mint-r-md: 10px;
+    --mint-r-box: 12px;
+    --mint-r-lg: 16px;
+    --mint-shadow-sm: 0 1px 2px rgba(17, 20, 19, .04);
+    --mint-font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --mint-brand-ink: #2563EB;
+        --mint-brand-soft: #16273F;
+        --mint-bg: #0A0F1A;
+        --mint-surface: #111826;
+        --mint-text: #E8EDF5;
+        --mint-text-2: #9AA8BC;
+        --mint-text-3: #738296;
+        --mint-line: #1F2A3A;
+        --mint-hover: #17202E;
+        --mint-shadow-sm: none;
+    }
+}
+
+body {
+    background: var(--mint-bg);
+    color: var(--mint-text);
+    font-family: var(--mint-font);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--mint-text);
+}
+
+a:active {
+    color: var(--mint-brand-ink);
+}
+
+/* 顶部导航 */
+#dzx5_header,
+.header,
+.mb_header {
+    background: color-mix(in srgb, var(--mint-bg) 86%, transparent);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-bottom: 1px solid var(--mint-line);
+    color: var(--mint-text);
+}
+
+/* 列表容器 → 卡片 */
+.mb_list,
+.threadlist,
+.forumlist {
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+    box-shadow: var(--mint-shadow-sm);
+    margin: 10px 12px;
+    overflow: hidden;
+}
+
+.mb_list li,
+.threadlist li,
+.forumlist li {
+    border-bottom: 1px solid var(--mint-line);
+    padding: 13px 14px;
+    background: transparent;
+}
+
+.mb_list li:last-child,
+.threadlist li:last-child,
+.forumlist li:last-child {
+    border-bottom: 0;
+}
+
+.mb_list li:active,
+.threadlist li:active {
+    background: var(--mint-hover);
+}
+
+/* 标题 */
+.mb_list .tit,
+.threadlist .tit,
+.mb_list h3,
+.mb_list h2 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--mint-text);
+}
+
+/* 摘要与元信息 */
+.mb_list .sum,
+.mb_list .info,
+.threadlist .info,
+.threadlist .by {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    line-height: 1.6;
+}
+
+/* 头像 */
+.avatar,
+.avt {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar img,
+.avt img {
+    border-radius: 50%;
+    display: block;
+}
+
+/* 标签 */
+.mb_list .tag,
+.threadlist .tag {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* 按钮 */
+.btn,
+button.btn,
+.pn {
+    border-radius: var(--mint-r-md) !important;
+    font-size: 14px;
+    height: 38px;
+    line-height: 36px;
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    color: var(--mint-text);
+}
+
+.btn.pn,
+.pn {
+    background: var(--mint-brand) !important;
+    border-color: var(--mint-brand) !important;
+    color: #FFFFFF !important;
+    font-weight: 650;
+}
+
+/* 输入 */
+input,
+textarea,
+select {
+    font-family: var(--mint-font);
+    border-radius: var(--mint-r-md);
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface);
+    color: var(--mint-text);
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--mint-brand);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .25);
+}
+
+/* 底部 Tab 栏 */
+.mb_footer,
+#dzx5_footer,
+.footer {
+    background: color-mix(in srgb, var(--mint-surface) 92%, transparent);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-top: 1px solid var(--mint-line);
+    color: var(--mint-text-3);
+}
+
+.mb_footer a,
+#dzx5_footer a {
+    color: var(--mint-text-3);
+    font-size: 11px;
+}
+
+.mb_footer a.on,
+.mb_footer a:active {
+    color: var(--mint-brand-ink);
+}
+
+/* 帖子详情 */
+.postlist {
+    background: transparent;
+}
+
+.postlist .post {
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+    box-shadow: var(--mint-shadow-sm);
+    margin: 10px 12px;
+    overflow: hidden;
+}
+
+.postlist .post .authi {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--mint-line);
+    background: color-mix(in srgb, var(--mint-surface) 96%, var(--mint-hover));
+}
+
+.postlist .post .message {
+    padding: 14px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--mint-text);
+}
+
+/* 提示条 */
+.tip,
+.alert {
+    border-radius: var(--mint-r-box);
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface);
+    color: var(--mint-text-2);
+    font-size: 13px;
+}
+
+/* 分页 */
+.pg,
+.pgs {
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pg a,
+.pg strong,
+.pgs a,
+.pgs strong {
+    min-width: 34px;
+    height: 34px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: var(--mint-r-sm);
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface);
+    color: var(--mint-text-2);
+    font-size: 13px;
+    padding: 0 8px;
+}
+
+.pg strong,
+.pgs strong {
+    background: var(--mint-text);
+    border-color: var(--mint-text);
+    color: var(--mint-bg);
+}
+
+/* 去除默认高饱和蓝 */
+.xw1,
+.xi1 {
+    color: var(--mint-brand-ink) !important;
+}
+
+.xg1,
+.xs0,
+.xs1,
+.xg2 {
+    color: var(--mint-text-3) !important;
+}
+
+/* ========== 手动深色（与 PC 共用 localStorage 键） ========== */
+
+html[data-mint-theme="dark"] {
+    --mint-brand-ink: #2563EB;
+    --mint-brand-soft: #16273F;
+    --mint-bg: #0A0F1A;
+    --mint-surface: #111826;
+    --mint-text: #E8EDF5;
+    --mint-text-2: #9AA8BC;
+    --mint-text-3: #738296;
+    --mint-line: #1F2A3A;
+    --mint-hover: #17202E;
+    --mint-shadow-sm: none;
+}
+
+html[data-mint-theme="dark"] body {
+    background: var(--mint-bg);
+    color: var(--mint-text);
+}
+
+/* ========== 顶栏美化（接管页面自带的 .header） ========== */
+
+.header,
+#dzx5_header,
+.mb_header,
+header.header {
+    position: sticky;
+    top: 0;
+    z-index: 300;
+    min-height: 52px;
+    background: color-mix(in srgb, var(--mint-surface) 88%, transparent) !important;
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-bottom: 1px solid var(--mint-line) !important;
+    color: var(--mint-text) !important;
+    box-shadow: none !important;
+}
+
+.header .header-title,
+.header .title,
+.header h1,
+.header h2 {
+    font-size: 15.5px !important;
+    font-weight: 650 !important;
+    color: var(--mint-text) !important;
+    letter-spacing: -.01em;
+}
+
+.header a {
+    color: var(--mint-text) !important;
+}
+
+/* ========== 底栏 ========== */
+
+#mfoot {
+    background: color-mix(in srgb, var(--mint-surface) 92%, transparent) !important;
+    backdrop-filter: saturate(1.6) blur(18px);
+    -webkit-backdrop-filter: saturate(1.6) blur(18px);
+    border-top: 1px solid var(--mint-line) !important;
+    box-shadow: 0 -1px 0 rgba(17, 20, 19, .02);
+}
+
+#mfoot a {
+    color: var(--mint-text-3) !important;
+    font-size: 10.5px;
+    font-weight: 500;
+}
+
+#mfoot a.on,
+#mfoot a.current,
+#mfoot .foot-ico {
+    color: var(--mint-brand-ink) !important;
+}
+
+#mfoot .foot-txt {
+    color: inherit;
+}
+
+/* 发布按钮 */
+#mfoot .foot-post {
+    color: var(--mint-brand-ink) !important;
+}
+
+/* ========== Mint 顶栏 ========== */
+
+#mint-m-top {
+    position: sticky;
+    top: 0;
+    z-index: 320;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 52px;
+    padding: 0 6px;
+    background: color-mix(in srgb, var(--mint-surface) 88%, transparent);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-bottom: 1px solid var(--mint-line);
+}
+
+.mint-m-btn {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--mint-text-2);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mint-m-btn:active {
+    background: var(--mint-hover);
+}
+
+.mint-m-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mint-m-title {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-size: 15.5px;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    color: var(--mint-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 隐藏页面自带顶栏，避免双层 */
+body.mint-m .header {
+    display: none !important;
+}
+
+/* ========== 抽屉侧栏 ========== */
+
+#mint-m-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 600;
+    background: rgba(8, 10, 10, .45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .22s cubic-bezier(.2, .8, .2, 1), visibility .22s;
+}
+
+#mint-m-scrim.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+#mint-m-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 700;
+    width: 82%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: var(--mint-surface);
+    border-right: 1px solid var(--mint-line);
+    box-shadow: 12px 0 40px rgba(17, 20, 19, .16);
+    transform: translateX(-102%);
+    transition: transform .26s cubic-bezier(.2, .8, .2, 1);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    overflow: hidden;
+}
+
+#mint-m-drawer.is-open {
+    transform: translateX(0);
+}
+
+html[data-mint-theme="dark"] #mint-m-drawer {
+    box-shadow: 12px 0 40px rgba(0, 0, 0, .6);
+}
+
+.mint-m-dr-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 16px 16px;
+    border-bottom: 1px solid var(--mint-line);
+}
+
+.mint-m-dr-logo img {
+    height: 30px;
+    width: auto;
+    display: block;
+}
+
+.mint-m-dr-name {
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--mint-text);
+    letter-spacing: -.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mint-m-dr-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mint-m-dr-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    height: 44px;
+    padding: 0 11px;
+    border-radius: 10px;
+    color: var(--mint-text-2) !important;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.mint-m-dr-item svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .62;
+}
+
+.mint-m-dr-item:active {
+    background: var(--mint-hover);
+    color: var(--mint-text) !important;
+}
+
+.mint-m-dr-foot {
+    padding: 14px 16px 18px;
+    border-top: 1px solid var(--mint-line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mint-m-dr-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: 1;
+    min-width: 0;
+    color: var(--mint-text) !important;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.mint-m-dr-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 32px;
+}
+
+.mint-m-dr-user span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mint-m-dr-out {
+    font-size: 12px;
+    color: var(--mint-text-3) !important;
+    flex: 0 0 auto;
+}
+
+.mint-m-dr-login {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--mint-text) !important;
+    color: var(--mint-bg) !important;
+    font-size: 13.5px;
+    font-weight: 650;
+}
+
+.mint-m-dr-reg {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--mint-line-strong, var(--mint-line));
+    color: var(--mint-text) !important;
+    font-size: 13.5px;
+    font-weight: 550;
+}
+

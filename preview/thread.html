@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mint-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>帖子详情 · CloudRail BBS 主题预览</title>
+<link rel="stylesheet" href="assets/shell.css">
+<style>
+.crumb{display:flex;align-items:center;gap:8px;padding:16px 0 14px;font-size:13px;color:var(--text-3);flex-wrap:wrap}
+.crumb a{color:var(--text-3)}.crumb a:hover{color:var(--brand-ink)}
+.crumb svg{width:13px;height:13px;stroke:var(--line-strong);fill:none;stroke-width:2}
+.crumb .here{color:var(--text-2)}
+
+/* 单栏主帖卡 */
+.post{background:var(--surface);border:1px solid var(--line);border-radius:var(--lg);box-shadow:var(--sh-sm);padding:26px 30px 20px;margin-bottom:14px}
+.post-tag{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:7px;background:var(--hover);color:var(--text-2);font-size:12px;font-weight:500}
+.post-h1{margin:14px 0 18px;font-size:28px;line-height:1.4;letter-spacing:-.025em;font-weight:700;color:var(--text)}
+.post-auth{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.post-auth .avatar{width:42px;height:42px;flex:0 0 42px;font-size:15px}
+.auth-name{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:650;line-height:1.35}
+.auth-lv{font-size:11.5px;font-weight:500;color:var(--text-3)}
+.auth-sub{font-size:12px;color:var(--text-3);margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.auth-sub .dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong)}
+.auth-stats{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:12.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.auth-stats span{display:inline-flex;align-items:center;gap:4px}
+.auth-stats svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.post-body{font-size:15.5px;line-height:1.92;color:var(--text)}
+.post-body p{margin:0 0 18px}
+.post-body strong{font-weight:650}
+.post-body h2{font-size:16px;font-weight:650;margin:26px 0 10px;letter-spacing:-.01em}
+.post-body ul{margin:0 0 18px;padding-left:22px}
+.post-body li{margin-bottom:8px}
+.post-body code{font-family:var(--mono);font-size:13px;background:var(--hover);padding:2px 6px;border-radius:5px;color:var(--brand-ink)}
+.post-body .img-wrap{margin:0 0 18px;border-radius:var(--box);overflow:hidden;border:1px solid var(--line);background:var(--surface-2)}
+.post-body .img-wrap svg{display:block;width:100%;height:auto}
+.post-body figcaption{font-size:12px;color:var(--text-3);padding:9px 12px;border-top:1px solid var(--line);text-align:center}
+
+.post-foot{display:flex;align-items:center;gap:2px;padding-top:14px;margin-top:6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pf{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:var(--r-sm);border:0;background:transparent;color:var(--text-3);font-size:12.5px;cursor:pointer;font-family:inherit}
+.pf:hover{background:var(--hover);color:var(--text)}
+.pf.like{color:var(--brand-ink)}
+.pf svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pf-right{margin-left:auto;display:flex;gap:2px}
+
+.reply-head{display:flex;align-items:center;justify-content:space-between;margin:26px 0 12px}
+.reply-head h2{margin:0;font-size:16px;font-weight:650;display:flex;align-items:center;gap:8px}
+.reply-head .n{font-size:12px;font-weight:600;color:var(--text-3);background:var(--hover);padding:1px 7px;border-radius:999px}
+.reply-head .sort{display:flex;gap:2px;padding:3px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm)}
+.reply-head .sort span{height:26px;display:inline-flex;align-items:center;padding:0 10px;border-radius:6px;font-size:12px;color:var(--text-3)}
+.reply-head .sort span.on{background:var(--text);color:var(--bg);font-weight:600}
+
+.rep{background:var(--surface);border:1px solid var(--line);border-radius:var(--box);box-shadow:var(--sh-sm);padding:18px 20px;margin-bottom:10px}
+.rep-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.rep-top .avatar{width:32px;height:32px;flex:0 0 32px;font-size:12px}
+.rep-name{font-size:13px;font-weight:650;line-height:1.3}
+.rep-badge{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;background:var(--brand-soft);color:var(--brand-ink);font-size:10.5px;font-weight:700;margin-left:4px}
+.rep-time{font-size:11.5px;color:var(--text-3)}
+.rep-floor{margin-left:auto;font-size:11.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.rep-text{font-size:14.5px;line-height:1.8;margin:0}
+.rep-quote{margin:0 0 10px;padding:10px 12px;border-radius:var(--r-sm);background:var(--surface-2);border:1px solid var(--line);font-size:12.5px;color:var(--text-3);line-height:1.65}
+.rep-foot{display:flex;align-items:center;gap:2px;margin-top:8px}
+.rep-foot .pf{height:26px;font-size:12px;padding:0 8px}
+
+.editor{background:var(--surface);border:1px solid var(--line);border-radius:var(--lg);box-shadow:var(--sh-sm);overflow:hidden;margin-top:14px}
+.editor-bar{display:flex;align-items:center;gap:2px;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.eb{display:grid;place-items:center;width:30px;height:30px;border-radius:6px;border:0;background:transparent;color:var(--text-2);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600}
+.eb:hover{background:var(--hover);color:var(--text)}
+.eb svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.eb-sep{width:1px;height:18px;background:var(--line);margin:0 6px}
+.editor-area{width:100%;min-height:110px;padding:14px 16px;border:0;background:transparent;color:var(--text);font-size:14.5px;line-height:1.75;resize:vertical;font-family:inherit;display:block}
+.editor-area:focus{outline:none}
+.editor-foot{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--surface-2)}
+.editor-foot .hint{font-size:12px;color:var(--text-3)}
+.editor-foot .right{margin-left:auto;display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--line-strong);background:var(--surface);color:var(--text);font-size:13px;font-weight:550;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--hover)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#FFFFFF;font-weight:650}
+
+/* 右栏 */
+.a-card{padding:16px}
+.a-head{display:flex;align-items:center;gap:11px}
+.a-head .avatar{width:44px;height:44px;flex:0 0 44px;font-size:16px;box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--brand-soft)}
+.a-nm{font-size:14.5px;font-weight:650;line-height:1.3}
+.a-sub{font-size:11.5px;color:var(--text-3);margin-top:2px}
+.a-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-top:14px}
+.a-num{background:var(--surface-2);padding:10px 4px;text-align:center}
+.a-num b{display:block;font-size:16px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.2}
+.a-num span{font-size:11px;color:var(--text-3)}
+.hot{display:flex;flex-direction:column;gap:2px}
+.hot a{display:flex;align-items:flex-start;gap:10px;padding:9px 6px;border-radius:var(--r-sm)}
+.hot a:hover{background:var(--hover)}
+.hot .idx{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--brand-ink);flex:0 0 20px;line-height:1.5;opacity:.8}
+.hot .row{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.hot .t{font-size:13.5px;color:var(--text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hot a:hover .t{color:var(--brand-ink)}
+.hot .v{font-size:11px;color:var(--text-3);font-variant-numeric:tabular-nums}
+
+.fabs{position:fixed;right:376px;bottom:28px;z-index:400;display:flex;flex-direction:column;align-items:center;gap:8px}
+.fab{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);color:var(--text-2);box-shadow:var(--sh-pop);cursor:pointer;font-family:inherit}
+.fab:hover{color:var(--text);border-color:var(--line-strong)}
+.fab svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:860px){
+  .post{padding:18px 16px 14px;border-radius:14px}
+  .post-h1{font-size:20px;margin:10px 0 14px}
+  .auth-stats{display:none}
+  .post-body{font-size:15px;line-height:1.85}
+  .fabs{display:none}
+}
+@media (max-width:1340px){.fabs{right:22px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="m12 3 7.5 4.5v9L12 21l-7.5-4.5v-9z"/><path d="m12 12 7.5-4.5M12 12v9M12 12 4.5 7.5"/></svg></span>
+      <span class="brand-txt">薄荷社区</span>
+    </div>
+    <nav class="nav">
+      <a class="item" href="index.html"><svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9.5v10h13v-10"/></svg><span>首页</span></a>
+      <a class="item on" href="forum.html"><svg viewBox="0 0 24 24"><path d="M4 5.5h7v13H4z"/><path d="M13 5.5h7v13h-7z"/></svg><span>论坛</span><i class="count">12</i></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8z"/></svg><span>精华</span></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><rect x="4" y="7.5" width="16" height="12" rx="2"/><path d="M8.5 7.5v-2a1.6 1.6 0 0 1 1.6-1.6h3.8a1.6 1.6 0 0 1 1.6 1.6v2"/><path d="M4 12.5h16"/></svg><span>资源</span></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5 4.5-4.5"/><path d="M5 19.5h14"/></svg><span>下载</span></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="M6.5 19v-6.5"/><path d="M12 19V5.5"/><path d="M17.5 19v-9"/></svg><span>排行</span></a>
+    </nav>
+    <div class="nav-label"><span>热门版块</span><a href="#">全部</a></div>
+    <nav class="nav">
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>综合讨论</span></a>
+      <a class="item" href="forum.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>建筑分享</span></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>红石技术</span></a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span>联机招募</span></a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="search">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+        <input type="text" placeholder="搜索主题、资源、用户">
+        <kbd>Ctrl K</kbd>
+      </div>
+      <div class="spacer"></div>
+      <button class="top-btn" id="themeBtn" title="切换主题">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.4 19.6 6 18M18 6l1.6-1.6"/></svg>
+      </button>
+      <a class="btn-ghost" href="login.html">登录</a>
+      <a class="btn-solid" href="#">注册</a>
+    </header>
+
+    <main class="col">
+      <div class="crumb">
+        <a href="index.html">首页</a>
+        <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        <a href="forum.html">论坛</a>
+        <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        <a href="forum.html">建筑分享</a>
+        <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        <span class="here">生存服长期动力</span>
+      </div>
+
+      <article class="post">
+        <span class="post-tag">讨论</span>
+        <h1 class="post-h1">一个小型 MC 生存服，怎样才能让玩家有长期玩下去的动力？</h1>
+
+        <div class="post-auth">
+          <span class="avatar" style="background:linear-gradient(135deg,#6FA8FF,#2563EB);color:#0B2E6F">阿</span>
+          <div>
+            <div class="auth-name">阿野 <span class="auth-lv">Lv.7 建筑爱好者</span></div>
+            <div class="auth-sub">
+              <span>发表于 昨天 23:25</span>
+              <span class="dot"></span>
+              <span>IP:浙江</span>
+            </div>
+          </div>
+          <div class="auth-stats">
+            <span><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>118</span>
+            <span><svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12z"/></svg>23</span>
+          </div>
+        </div>
+
+        <div class="post-body">
+          <p>最近自己开了一个 MC 生存服，想做成一个能够长期发展的玩家社区，但实际运营下来遇到了一些问题，想听听各位服主和玩家的建议。</p>
+          <p>目前服务器偏原版生存，允许生电、建筑和自由探索。我希望大家能保留自己的生存进度，同时参与一些公共建设，让整个世界慢慢发展起来。</p>
+
+          <h2>目前我的一些想法：</h2>
+          <ul>
+            <li><strong>社区建设：</strong>保留自然地形，由玩家共同建设主城，各自拥有私人领地和建筑。</li>
+            <li><strong>生电与生存平衡：</strong>保留生电玩法与个人财产，但如果公共机器无限免费供应物资，普通生存玩家可能很快失去发展动力。</li>
+            <li><strong>经济系统：</strong>玩家可以自行收集材料，也可以通过出售物资、承接建筑委托等方式赚取货币，再购买自己需要的东西。</li>
+            <li><strong>长期发展：</strong>希望通过社区建设和玩家之间的交易，让不同类型的玩家产生更多互动，同时避免过于复杂的规则。</li>
+          </ul>
+
+          <figure class="img-wrap">
+            <svg viewBox="0 0 720 340" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#08182B"/><stop offset=".6" stop-color="#1B3F63"/><stop offset="1" stop-color="#2E5A9E"/></linearGradient>
+                <radialGradient id="lp" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF0B8" stop-opacity=".95"/><stop offset="1" stop-color="#FFD873" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect width="720" height="340" fill="url(#sk)"/>
+              <g opacity=".45" fill="#CFE9F5"><circle cx="110" cy="48" r="1.3"/><circle cx="250" cy="36" r="1"/><circle cx="430" cy="58" r="1.1"/><circle cx="560" cy="40" r="1"/><circle cx="650" cy="76" r="1.2"/></g>
+              <rect y="238" width="720" height="102" fill="#14406C"/>
+              <g opacity=".16" stroke="#BFE9F0" stroke-width="1.4" fill="none">
+                <path d="M-20 268q40-9 80 0t80 0 80 0 80 0 80 0 80 0 80 0 80 0 80 0"/>
+                <path d="M-20 300q40-8 80 0t80 0 80 0 80 0 80 0 80 0 80 0 80 0 80 0"/>
+              </g>
+              <path d="M470 238l34-14 48 4 40 12-18 16-84 4z" fill="#22303A"/>
+              <path d="M528 238 L542 128 h36 L592 238 Z" fill="#E8EAE6"/>
+              <path d="M528 238 L542 128 h12 L556 238 Z" fill="#F7F8F5"/>
+              <g fill="#C4453E"><rect x="536" y="172" width="56" height="13"/><rect x="532" y="208" width="62" height="13"/></g>
+              <rect x="544" y="110" width="32" height="20" rx="3" fill="#2A3A44"/>
+              <circle cx="560" cy="120" r="32" fill="url(#lp)"/>
+              <circle cx="560" cy="120" r="6" fill="#FFF6D0"/>
+              <path d="M544 110 L560 96 L576 110 Z" fill="#B23A34"/>
+              <path d="M560 120 L720 60 L720 104 Z" fill="#FFE9A8" opacity=".16"/>
+            </svg>
+            <figcaption>目前主城的样子，公共建筑都集中在东岸</figcaption>
+          </figure>
+
+          <p>想请教一下，有没有更有效的办法让玩家愿意长期留下来？比如任务系统、赛季制，还是靠社区氛围本身？</p>
+        </div>
+
+        <div class="post-foot">
+          <button class="pf like"><svg viewBox="0 0 24 24"><path d="M7 21V9l5-6 1.5 1.2c.4.3.6.8.5 1.3L13 9h5.5a2 2 0 0 1 2 2.4l-1.3 7A2 2 0 0 1 17.2 20H7z"/><path d="M7 9H3v12h4"/></svg>支持 42</button>
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M12 3.6 14.6 9l5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8 9.4 9z"/></svg>收藏</button>
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/><path d="M4 14v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/></svg>分享</button>
+          <div class="pf-right">
+            <button class="pf"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <div class="reply-head">
+        <h2>全部回复 <span class="n">23</span></h2>
+        <div class="sort"><span class="on">按时间</span><span>按热度</span><span>只看楼主</span></div>
+      </div>
+
+      <div class="rep">
+        <div class="rep-top">
+          <span class="avatar" style="background:linear-gradient(135deg,#C7B3F2,#8E6AC7);color:#241338">K</span>
+          <div>
+            <div class="rep-name">Kirin <span class="rep-badge">Lv.9</span></div>
+            <div class="rep-time">昨天 23:41</div>
+          </div>
+          <span class="rep-floor">#2</span>
+        </div>
+        <p class="rep-text">我觉得关键是<strong>让玩家的投入能被别人看见</strong>。主城建设、交易记录、贡献榜，这些比任务系统有效得多。</p>
+        <div class="rep-foot">
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M7 21V9l5-6 1.5 1.2c.4.3.6.8.5 1.3L13 9h5.5a2 2 0 0 1 2 2.4l-1.3 7A2 2 0 0 1 17.2 20H7z"/><path d="M7 9H3v12h4"/></svg>支持 12</button>
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12z"/></svg>回复</button>
+        </div>
+      </div>
+
+      <div class="rep">
+        <div class="rep-top">
+          <span class="avatar" style="background:linear-gradient(135deg,#6FA8FF,#2563EB);color:#0B2E6F">阿</span>
+          <div>
+            <div class="rep-name">阿野 <span class="rep-badge">楼主</span></div>
+            <div class="rep-time">昨天 23:52</div>
+          </div>
+          <span class="rep-floor">#3</span>
+        </div>
+        <div class="rep-quote"><b>Kirin：</b>让玩家的投入能被别人看见</div>
+        <p class="rep-text">这个角度很好。我确实一直只在想「给什么奖励」，没想过「让贡献可见」这件事。</p>
+        <div class="rep-foot">
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M7 21V9l5-6 1.5 1.2c.4.3.6.8.5 1.3L13 9h5.5a2 2 0 0 1 2 2.4l-1.3 7A2 2 0 0 1 17.2 20H7z"/><path d="M7 9H3v12h4"/></svg>支持 6</button>
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12z"/></svg>回复</button>
+        </div>
+      </div>
+
+      <div class="rep">
+        <div class="rep-top">
+          <span class="avatar" style="background:linear-gradient(135deg,#9BE0AE,#4F9E68);color:#0F2A18">林</span>
+          <div>
+            <div class="rep-name">林深见鹿 <span class="rep-badge">Lv.5</span></div>
+            <div class="rep-time">2 小时前</div>
+          </div>
+          <span class="rep-floor">#4</span>
+        </div>
+        <p class="rep-text">经济系统一定要谨慎，货币一旦通胀就很难收回来。建议前期用「材料换材料」的以物易物。</p>
+        <div class="rep-foot">
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M7 21V9l5-6 1.5 1.2c.4.3.6.8.5 1.3L13 9h5.5a2 2 0 0 1 2 2.4l-1.3 7A2 2 0 0 1 17.2 20H7z"/><path d="M7 9H3v12h4"/></svg>支持 4</button>
+          <button class="pf"><svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12z"/></svg>回复</button>
+        </div>
+      </div>
+
+      <div class="editor">
+        <div class="editor-bar">
+          <button class="eb" title="加粗"><b>B</b></button>
+          <button class="eb" title="斜体"><i style="font-style:italic">I</i></button>
+          <button class="eb" title="下划线"><u>U</u></button>
+          <span class="eb-sep"></span>
+          <button class="eb" title="链接"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7L12.5 19.5"/></svg></button>
+          <button class="eb" title="图片"><svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.4"/><circle cx="8.6" cy="9.6" r="1.6"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5"/></svg></button>
+          <button class="eb" title="代码"><svg viewBox="0 0 24 24"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4"/></svg></button>
+        </div>
+        <textarea class="editor-area" placeholder="写下你的回复…支持 Markdown 与拖拽上传图片"></textarea>
+        <div class="editor-foot">
+          <span class="hint">Ctrl + Enter 快速发送</span>
+          <div class="right">
+            <button class="btn">预览</button>
+            <button class="btn primary">发表回复</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <span>© 2026 薄荷社区</span><span class="sep">·</span>
+        <a href="#">关于我们</a><span class="sep">·</span>
+        <a href="#">社区规范</a><span class="sep">·</span>
+        <a href="#">联系我们</a><span class="sep">·</span>
+        <a href="#">移动版</a>
+        <span class="sep">·</span>
+        <span>GMT+8, 2026-11-27 13:19</span>
+        <span style="margin-left:auto">Powered by Discuz! X5.0 · CloudRail BBS Theme</span>
+      </footer>
+    </main>
+
+    <aside class="rail">
+      <div class="rcard a-card">
+        <div class="a-head">
+          <span class="avatar" style="background:linear-gradient(135deg,#6FA8FF,#2563EB);color:#0B2E6F">阿</span>
+          <div>
+            <div class="a-nm">阿野</div>
+            <div class="a-sub">楼主 · Lv.7 建筑爱好者</div>
+          </div>
+        </div>
+        <div class="a-nums">
+          <div class="a-num"><b>248</b><span>主题</span></div>
+          <div class="a-num"><b>1,182</b><span>回帖</span></div>
+          <div class="a-num"><b>1,240</b><span>积分</span></div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rhead"><h3>本版热门</h3><a href="forum.html">建筑分享</a></div>
+        <div class="hot">
+          <a href="#"><span class="idx">01</span><div class="row"><span class="t">海边灯塔建造全记录，附材料清单</span><span class="v">152,860 浏览</span></div></a>
+          <a href="#"><span class="idx">02</span><div class="row"><span class="t">沙漠神殿改造，把内部掏空做了个中庭</span><span class="v">38,279 浏览</span></div></a>
+          <a href="#"><span class="idx">03</span><div class="row"><span class="t">悬崖栈道，附地形生成种子和坐标</span><span class="v">28,612 浏览</span></div></a>
+          <a href="#"><span class="idx">04</span><div class="row"><span class="t">中世纪村庄规划思路分享</span><span class="v">21,531 浏览</span></div></a>
+          <a href="#"><span class="idx">05</span><div class="row"><span class="t">红石灯带弧线接法，实测三种方案</span><span class="v">14,242 浏览</span></div></a>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rhead"><h3>版块信息</h3></div>
+        <div style="display:flex;flex-direction:column;font-size:13px;color:var(--text-2)">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span style="color:var(--text-3)">版主</span><span>阿野 · Kirin</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span style="color:var(--text-3)">主题</span><span>2,184</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="color:var(--text-3)">今日</span><span>12</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="fabs">
+  <button class="fab" title="回到顶部"><svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg></button>
+  <button class="fab" title="跳到回复"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H8l-4 4z"/></svg></button>
+</div>
+
+<div class="demo-bar">
+  <a href="index.html">首页</a>
+  <a href="forum.html">版块</a>
+  <a href="thread.html" class="on">帖子</a>
+  <a href="login.html">登录</a>
+  <button id="btnTheme">
+    <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></svg>
+    深色
+  </button>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('btnTheme');
+  function isDark(){return root.getAttribute('data-mint-theme')==='dark'}
+  function set(m){root.setAttribute('data-mint-theme',m);btn.lastChild.textContent=m==='dark'?'浅色':'深色';}
+  document.getElementById('themeBtn').onclick=function(){set(isDark()?'light':'dark')};
+  btn.onclick=function(){set(isDark()?'light':'dark')};
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();var i=document.querySelector('.search input');if(i){i.focus();i.select();}}
+  });
+})();
+</script>
+</body>
+</html>

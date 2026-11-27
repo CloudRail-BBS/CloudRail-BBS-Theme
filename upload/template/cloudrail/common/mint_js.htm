@@ -1,0 +1,114 @@
+<script type="text/javascript">
+(function () {
+    'use strict';
+    var KEY = 'mint_theme';
+    var root = document.documentElement;
+
+    function setTheme(mode) {
+        root.setAttribute('data-mint-theme', mode);
+        try { localStorage.setItem(KEY, mode); } catch (e) {}
+    }
+
+    function currentMode() {
+        return root.getAttribute('data-mint-theme') || 'auto';
+    }
+
+    function effectiveDark() {
+        var m = currentMode();
+        if (m === 'dark') return true;
+        if (m === 'light') return false;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    var btn = document.getElementById('mint-theme-toggle');
+    if (btn) {
+        btn.addEventListener('click', function () {
+            setTheme(effectiveDark() ? 'light' : 'dark');
+        });
+    }
+
+    /* Ctrl/Cmd + K 聚焦搜索 */
+    document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+            var inp = document.querySelector('#mint-scbar .mint-search-in');
+            if (inp) {
+                e.preventDefault();
+                inp.focus();
+                inp.select();
+            }
+        }
+    });
+
+    /* 用户悬停名片：接管 Discuz 原生 showMenu，套用 mint-card-pop 外观 */
+    if (window.showMenu && !window.__mintCardPatched) {
+        window.__mintCardPatched = true;
+        var rawShow = window.showMenu;
+        window.showMenu = function (obj) {
+            var rtn = rawShow.apply(this, arguments);
+            try {
+                if (obj && (obj.ctrlid === 'userinfo' || /^uid_/.test(obj.ctrlid || ''))) {
+                    for (var i = 0; i < document.body.children.length; i++) {
+                        var el = document.body.children[i];
+                        if (el.className && /p_pop/.test(el.className) && el.style.display !== 'none') {
+                            el.classList.add('mint-card-pop');
+                        }
+                    }
+                }
+            } catch (err) {}
+            return rtn;
+        };
+    }
+
+    /* 侧栏导航当前项高亮（Discuz 导航输出的是完整 <a>，没有类名可挂） */
+    (function () {
+        var links = document.querySelectorAll('#mint-side .mint-nav a');
+        if (!links.length) return;
+        var here = location.pathname.split('/').pop() || 'index.php';
+        var search = location.search || '';
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href') || '';
+            var base = href.split('?')[0].replace(/^\.\//, '');
+            if (!base || base === '#') continue;
+            if (base === here || (here === 'index.php' && (base === 'forum.php' || base === './'))) {
+                links[i].classList.add('mint-on');
+                break;
+            }
+        }
+    })();
+
+    /* 帖子页：把左侧头像栏内联到作者行，形成「头像 + 名字 + 时间 + 楼层」单行结构 */
+    function inlinePostAuthor() {
+        var postlist = document.getElementById('postlist');
+        if (!postlist) return;
+
+        var rows = postlist.querySelectorAll('table.plhin');
+        for (var i = 0; i < rows.length; i++) {
+            var tb = rows[i];
+            if (tb.getAttribute('data-mint-flat') === '1') continue;
+
+            var pls = tb.querySelector('td.pls');
+            var plc = tb.querySelector('td.plc');
+            if (!plc) continue;
+
+            var pi = plc.querySelector('.pi');
+            var favatar = pls ? pls.querySelector('.favatar') : null;
+
+            if (favatar && pi) {
+                favatar.classList.add('mint-inline-author');
+                pi.insertBefore(favatar, pi.firstChild);
+            }
+            if (pls) {
+                pls.style.display = 'none';
+            }
+            tb.classList.add('mint-flat');
+            tb.setAttribute('data-mint-flat', '1');
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inlinePostAuthor);
+    } else {
+        inlinePostAuthor();
+    }
+})();
+</script>

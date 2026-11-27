@@ -1,0 +1,20 @@
+{
+  "name": "CloudRail-BBS-Theme",
+  "title": "CloudRail BBS Theme for Discuz! X5.0",
+  "version": "1.0.0",
+  "released": "2026-11-27",
+  "requires": {
+    "discuz": "X5.0",
+    "php": "8.0"
+  },
+  "branch": "main",
+  "download": "https://github.com/CloudRail-BBS/CloudRail-BBS-Theme/archive/refs/heads/main.zip",
+  "tplDir": "upload/template/cloudrail",
+  "changelog": [
+    "首个公开版本：PC 侧栏 + 顶栏骨架、右栏细胞模板",
+    "帖子详情单栏大卡片，作者信息横排",
+    "版块 / 注册 / 找回密码 / 发帖 / 搜索 / 门户 / 空间 页面模板",
+    "手机端 touch 顶栏与抽屉侧栏",
+    "蓝白配色，浅色 / 深色双主题"
+  ]
+}

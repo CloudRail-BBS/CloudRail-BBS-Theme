@@ -1,0 +1,1351 @@
+/*
+ * Mint for Discuz! X5.0
+ * 核心样式层 — 会被自动追加到 data/cache/style_{id}_common.css 末尾
+ * 设计语言参考 klpbbs.com：低饱和中性底色 + 薄荷绿品牌色 + 细描边卡片 + 轻阴影
+ */
+
+:root {
+    --mint-brand: #2563EB;
+    --mint-brand-ink: #1D4ED8;
+    --mint-brand-soft: #E8F0FE;
+    --mint-brand-ring: rgba(37, 99, 235, .25);
+
+    --mint-bg: #F6F8FB;
+    --mint-surface: #FFFFFF;
+    --mint-surface-2: #FBFCFE;
+    --mint-text: #0F172A;
+    --mint-text-2: #475569;
+    --mint-text-3: #64748B;
+    --mint-line: #E5EAF1;
+    --mint-line-strong: #D6DEE9;
+    --mint-hover: #F1F4F9;
+
+    --mint-ok: #1B7A45;
+    --mint-ok-soft: #E6F5EC;
+    --mint-danger: #C9302C;
+    --mint-danger-soft: #FDECEC;
+    --mint-info: #2B5AAE;
+    --mint-info-soft: #E8EEFA;
+    --mint-badge: #E5484D;
+
+    --mint-r-sm: 8px;
+    --mint-r-md: 10px;
+    --mint-r-box: 12px;
+    --mint-r-pop: 14px;
+    --mint-r-lg: 16px;
+
+    --mint-shadow-sm: 0 1px 2px rgba(17, 20, 19, .04);
+    --mint-shadow-hover: 0 6px 18px rgba(17, 20, 19, .08);
+    --mint-shadow-pop: 0 12px 32px rgba(17, 20, 19, .12), 0 0 0 1px var(--mint-line);
+
+    --mint-top-h: 64px;
+    --mint-side-w: 248px;
+    --mint-rail-w: 320px;
+
+    --mint-font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --mint-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, "PingFang SC", monospace;
+
+    --mint-dur-1: 120ms;
+    --mint-dur-2: 200ms;
+    --mint-dur-3: 280ms;
+    --mint-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+html[data-mint-theme="dark"] {
+    --mint-brand-ink: #2563EB;
+    --mint-brand-soft: #16273F;
+
+    --mint-bg: #0A0F1A;
+    --mint-surface: #111826;
+    --mint-surface-2: #16202F;
+    --mint-text: #E8EDF5;
+    --mint-text-2: #9AA8BC;
+    --mint-text-3: #738296;
+    --mint-line: #1F2A3A;
+    --mint-line-strong: #2A3748;
+    --mint-hover: #17202E;
+
+    --mint-ok-soft: #15301F;
+    --mint-danger-soft: #3A1D1F;
+    --mint-info-soft: #1B263D;
+
+    --mint-shadow-sm: none;
+    --mint-shadow-hover: 0 8px 24px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .06);
+    --mint-shadow-pop: 0 12px 32px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+@media (prefers-color-scheme: dark) {
+    html[data-mint-theme="auto"] {
+        --mint-brand-ink: #2563EB;
+        --mint-brand-soft: #16273F;
+        --mint-bg: #0A0F1A;
+        --mint-surface: #111826;
+        --mint-surface-2: #16202F;
+        --mint-text: #E8EDF5;
+        --mint-text-2: #9AA8BC;
+        --mint-text-3: #738296;
+        --mint-line: #1F2A3A;
+        --mint-line-strong: #2A3748;
+        --mint-hover: #17202E;
+        --mint-ok-soft: #15301F;
+        --mint-danger-soft: #3A1D1F;
+        --mint-info-soft: #1B263D;
+        --mint-shadow-sm: none;
+        --mint-shadow-hover: 0 8px 24px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .06);
+        --mint-shadow-pop: 0 12px 32px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .08);
+    }
+}
+
+/* ---------- 基础重置（仅覆盖 Discuz 默认观感，不动布局骨架） ---------- */
+
+body {
+    background: var(--mint-bg);
+    color: var(--mint-text);
+    font-family: var(--mint-font);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-family: var(--mint-font);
+}
+
+a {
+    color: var(--mint-text);
+    transition: color var(--mint-dur-1) var(--mint-ease);
+}
+
+a:hover {
+    color: var(--mint-brand-ink);
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--mint-brand);
+    color: #FFFFFF;
+}
+
+:focus-visible {
+    outline: 2px solid var(--mint-brand);
+    outline-offset: 2px;
+    border-radius: var(--mint-r-sm);
+}
+
+img {
+    max-width: 100%;
+}
+
+/* 滚动条 */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mint-line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--mint-line-strong);
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--mint-text-3);
+    background-clip: content-box;
+}
+
+/* ---------- 应用骨架 ---------- */
+
+#mint-app {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+#mint-side {
+    width: var(--mint-side-w);
+    flex: 0 0 var(--mint-side-w);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 18px 14px 24px;
+    background: var(--mint-surface);
+    border-right: 1px solid var(--mint-line);
+    box-sizing: border-box;
+}
+
+#mint-main {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--mint-rail-w);
+    align-content: start;
+    gap: 0 24px;
+    padding: var(--mint-top-h) 24px 48px 28px;
+    box-sizing: border-box;
+}
+
+#mint-main > #wp {
+    grid-column: 1;
+    min-width: 0;
+}
+
+#mint-main > #mint-rail {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* 品牌区 */
+.mint-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 8px 18px;
+    text-decoration: none;
+}
+
+.mint-brand img {
+    height: 34px;
+    width: auto;
+    display: block;
+}
+
+.mint-brand-txt {
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    color: var(--mint-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 侧栏导航 */
+.mint-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mint-nav li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: none !important;
+    border: 0 !important;
+    line-height: 1;
+}
+
+.mint-nav li > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: var(--mint-r-md);
+    color: var(--mint-text-2) !important;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background 120ms var(--mint-ease), color 120ms var(--mint-ease);
+}
+
+.mint-nav li > a::before {
+    content: "";
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    opacity: .55;
+    -webkit-mask-size: 18px 18px;
+    mask-size: 18px 18px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='3.5' width='7' height='7' rx='1.6'/%3E%3Crect x='13.5' y='3.5' width='7' height='7' rx='1.6'/%3E%3Crect x='3.5' y='13.5' width='7' height='7' rx='1.6'/%3E%3Crect x='13.5' y='13.5' width='7' height='7' rx='1.6'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='3.5' width='7' height='7' rx='1.6'/%3E%3Crect x='13.5' y='3.5' width='7' height='7' rx='1.6'/%3E%3Crect x='3.5' y='13.5' width='7' height='7' rx='1.6'/%3E%3Crect x='13.5' y='13.5' width='7' height='7' rx='1.6'/%3E%3C/svg%3E");
+}
+
+.mint-nav li:nth-of-type(6n+1) > a::before {
+    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.5 12 3.5l8.5 7'/%3E%3Cpath d='M5.5 9.5v10h13v-10'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 10.5 12 3.5l8.5 7'/%3E%3Cpath d='M5.5 9.5v10h13v-10'/%3E%3C/svg%3E");
+}
+
+.mint-nav li:nth-of-type(6n+2) > a::before {
+    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5.5h7v13H4z'/%3E%3Cpath d='M13 5.5h7v13h-7z'/%3E%3Cpath d='M6.2 8.6h2.6M6.2 12h2.6M15.2 8.6h2.6M15.2 12h2.6'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5.5h7v13H4z'/%3E%3Cpath d='M13 5.5h7v13h-7z'/%3E%3Cpath d='M6.2 8.6h2.6M6.2 12h2.6M15.2 8.6h2.6M15.2 12h2.6'/%3E%3C/svg%3E");
+}
+
+.mint-nav li:nth-of-type(6n+3) > a::before {
+    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8z'/%3E%3C/svg%3E");
+}
+
+.mint-nav li > a > span {
+    display: none;
+}
+
+.mint-nav li > a:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text) !important;
+}
+
+.mint-nav li > a:hover::before {
+    opacity: .85;
+}
+
+.mint-nav li.mint-on > a {
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink) !important;
+    font-weight: 600;
+}
+
+.mint-nav li.mint-on > a::before {
+    opacity: 1;
+}
+
+/* 侧栏底部小卡 */
+.mint-side-card {
+    margin-top: 18px;
+    padding: 14px;
+    background: var(--mint-surface-2);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+}
+
+.mint-side-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mint-text);
+    margin: 0 0 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mint-side-card p {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ---------- 顶栏 ---------- */
+
+#mint-top {
+    position: fixed;
+    top: 0;
+    left: var(--mint-side-w);
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: var(--mint-top-h);
+    padding: 0 24px 0 28px;
+    box-sizing: border-box;
+    background: color-mix(in srgb, var(--mint-bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(18px);
+    -webkit-backdrop-filter: saturate(1.6) blur(18px);
+    border-bottom: 1px solid var(--mint-line);
+    transition: left 200ms var(--mint-ease);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+    #mint-top {
+        background: var(--mint-bg);
+    }
+}
+
+.mint-top-spacer {
+    flex: 1 1 auto;
+}
+
+.mint-top-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0 10px;
+    border-radius: var(--mint-r-md);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--mint-text-2);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background var(--mint-dur-1) var(--mint-ease), color var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-top-btn:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text);
+}
+
+.mint-top-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mint-btn-solid {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--mint-r-md);
+    background: var(--mint-text);
+    color: var(--mint-bg);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    transition: transform var(--mint-dur-1) var(--mint-ease), opacity var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-btn-solid:hover {
+    color: var(--mint-bg);
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+.mint-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: var(--mint-r-md);
+    border: 1px solid var(--mint-line-strong);
+    color: var(--mint-text);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-btn-ghost:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text);
+}
+
+/* 顶栏搜索 */
+#mint-top .mint-search {
+    flex: 0 1 460px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#mint-top .mint-search form {
+    width: 100%;
+    margin: 0;
+}
+
+#mint-top .mint-search .mint-search-in {
+    width: 100%;
+    height: 38px;
+    padding: 0 62px 0 38px;
+    box-sizing: border-box;
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-md);
+    color: var(--mint-text);
+    font-size: 13px;
+    transition: border-color var(--mint-dur-2) var(--mint-ease), box-shadow var(--mint-dur-2) var(--mint-ease);
+}
+
+#mint-top .mint-search .mint-search-in::placeholder {
+    color: var(--mint-text-3);
+}
+
+#mint-top .mint-search .mint-search-in:focus {
+    outline: none;
+    border-color: var(--mint-brand);
+    box-shadow: 0 0 0 3px var(--mint-brand-ring);
+}
+
+.mint-search-ico {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    stroke: var(--mint-text-3);
+    fill: none;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.mint-search-kbd {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 6px;
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface-2);
+    color: var(--mint-text-3);
+    font-size: 11px;
+    font-family: var(--mint-mono);
+    pointer-events: none;
+}
+
+/* 顶栏用户 */
+.mint-top-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mint-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--mint-hover);
+    flex: 0 0 auto;
+}
+
+.mint-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ---------- 内容区通用 ---------- */
+
+#wp {
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#mint-main .wp {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* 面包屑 */
+#pt,
+.mint-crumb {
+    margin: 0 !important;
+    padding: 14px 0 12px !important;
+    font-size: 13px !important;
+    color: var(--mint-text-3) !important;
+    line-height: 1.6;
+    background: transparent !important;
+}
+
+#pt a,
+.mint-crumb a {
+    color: var(--mint-text-3);
+}
+
+#pt a:hover,
+.mint-crumb a:hover {
+    color: var(--mint-brand-ink);
+}
+
+#pt .y {
+    float: right;
+}
+
+/* 板块模块 .bm → 卡片 */
+.bm {
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+    box-shadow: var(--mint-shadow-sm);
+    margin-bottom: 16px !important;
+    overflow: hidden;
+}
+
+.bm.bm_c {
+    padding: 0;
+}
+
+.bm_h {
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--mint-line) !important;
+    padding: 14px 16px !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.bm_h > h2,
+.bm_h > h3,
+.bm_h > .xs2 {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.bm_h .y,
+.bm_h .o {
+    flex: 0 0 auto;
+}
+
+.bm_h .xs2,
+.bm_h h2,
+.bm_h h3 {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--mint-text) !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+}
+
+.bm_h .xs2 a,
+.bm_h h2 a {
+    color: var(--mint-text) !important;
+}
+
+.bm_c {
+    padding: 4px 0 !important;
+    background: transparent !important;
+}
+
+.bm_c.cl {
+    padding: 16px !important;
+}
+
+/* 传统表格列表 → 现代行 */
+.mint-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.mint-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--mint-line);
+    transition: background var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-row:last-child {
+    border-bottom: 0;
+}
+
+.mint-row:hover {
+    background: var(--mint-hover);
+}
+
+.mint-row-ico {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--mint-r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.mint-row-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.mint-row-title {
+    font-size: 14px;
+    font-weight: 550;
+    color: var(--mint-text);
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mint-row-title:hover {
+    color: var(--mint-brand-ink);
+}
+
+.mint-row-sub {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mint-row-meta {
+    flex: 0 0 auto;
+    text-align: right;
+    font-size: 12px;
+    color: var(--mint-text-3);
+    font-variant-numeric: tabular-nums;
+}
+
+.mint-row-meta b {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mint-text-2);
+}
+
+/* 徽标 */
+.mint-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.mint-tag-mute {
+    background: var(--mint-hover);
+    color: var(--mint-text-2);
+}
+
+.mint-tag-danger {
+    background: var(--mint-danger-soft);
+    color: var(--mint-danger);
+}
+
+.mint-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint-ok);
+    display: inline-block;
+}
+
+/* 按钮 */
+.mint-btn,
+.btn,
+button.mint-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 14px;
+    border-radius: var(--mint-r-md);
+    border: 1px solid var(--mint-line-strong);
+    background: var(--mint-surface);
+    color: var(--mint-text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--mint-dur-1) var(--mint-ease), border-color var(--mint-dur-1) var(--mint-ease), transform var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-btn:hover,
+.btn:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text);
+    border-color: var(--mint-line-strong);
+}
+
+.mint-btn:active {
+    transform: scale(.98);
+}
+
+.mint-btn-primary {
+    background: var(--mint-brand);
+    border-color: var(--mint-brand);
+    color: #FFFFFF;
+    font-weight: 650;
+}
+
+.mint-btn-primary:hover {
+    background: var(--mint-brand);
+    color: #FFFFFF;
+    filter: brightness(1.04);
+}
+
+.mint-btn-dark {
+    background: var(--mint-text);
+    border-color: var(--mint-text);
+    color: var(--mint-bg);
+}
+
+.mint-btn-dark:hover {
+    color: var(--mint-bg);
+    opacity: .92;
+}
+
+/* 输入 */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface);
+    color: var(--mint-text);
+    border-radius: var(--mint-r-md);
+    padding: 8px 12px;
+    font-size: 13px;
+    transition: border-color var(--mint-dur-2) var(--mint-ease), box-shadow var(--mint-dur-2) var(--mint-ease);
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--mint-brand);
+    box-shadow: 0 0 0 3px var(--mint-brand-ring);
+}
+
+.px,
+.pn {
+    border-radius: var(--mint-r-md) !important;
+    font-size: 13px;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 14px;
+}
+
+.pn {
+    background: var(--mint-brand) !important;
+    border-color: var(--mint-brand) !important;
+    color: #FFFFFF !important;
+    font-weight: 650;
+    padding: 0 18px;
+}
+
+.pn:hover {
+    filter: brightness(1.04);
+    color: #FFFFFF !important;
+}
+
+/* 分页 */
+.pg,
+.pgs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 0;
+}
+
+.pg a,
+.pg strong,
+.pgs a,
+.pgs strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: var(--mint-r-sm);
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface);
+    color: var(--mint-text-2);
+    font-size: 13px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.pg a:hover,
+.pgs a:hover {
+    border-color: var(--mint-brand);
+    color: var(--mint-brand-ink);
+}
+
+.pg strong,
+.pgs strong {
+    background: var(--mint-text);
+    border-color: var(--mint-text);
+    color: var(--mint-bg);
+    font-weight: 600;
+}
+
+/* 弹层 / 下拉 */
+.p_pop,
+.p_pop_menus {
+    background: var(--mint-surface) !important;
+    border: 1px solid var(--mint-line) !important;
+    border-radius: var(--mint-r-pop) !important;
+    box-shadow: var(--mint-shadow-pop) !important;
+    padding: 6px !important;
+    overflow: hidden;
+}
+
+.p_pop li a,
+.p_pop_menus li a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--mint-r-sm);
+    color: var(--mint-text-2);
+    font-size: 13px;
+}
+
+.p_pop li a:hover,
+.p_pop_menus li a:hover {
+    background: var(--mint-hover);
+    color: var(--mint-text);
+}
+
+/* 提示条 */
+.mint-alert {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--mint-r-box);
+    border: 1px solid var(--mint-line);
+    background: var(--mint-surface-2);
+    font-size: 13px;
+    color: var(--mint-text-2);
+    margin-bottom: 16px;
+}
+
+.mint-alert-warn {
+    background: var(--mint-danger-soft);
+    border-color: transparent;
+    color: var(--mint-danger);
+}
+
+/* 引用/代码块 */
+blockquote {
+    margin: 12px 0;
+    padding: 12px 14px;
+    border-left: 3px solid var(--mint-brand);
+    background: var(--mint-surface-2);
+    border-radius: 0 var(--mint-r-sm) var(--mint-r-sm) 0;
+    color: var(--mint-text-2);
+    font-size: 13px;
+}
+
+code,
+pre {
+    font-family: var(--mint-mono);
+    font-size: 12.5px;
+}
+
+pre {
+    background: var(--mint-surface-2);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+    padding: 14px;
+    overflow: auto;
+    color: var(--mint-text-2);
+}
+
+/* ---------- 右侧栏 ---------- */
+
+#mint-rail {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.mint-rail-card {
+    background: var(--mint-surface);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-box);
+    box-shadow: var(--mint-shadow-sm);
+    padding: 16px;
+}
+
+.mint-rail-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.mint-rail-head h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--mint-text);
+    margin: 0;
+}
+
+.mint-rail-head a {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    text-decoration: none;
+}
+
+.mint-rail-head a:hover {
+    color: var(--mint-brand-ink);
+}
+
+.mint-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--mint-line);
+    border-radius: var(--mint-r-md);
+    overflow: hidden;
+    border: 1px solid var(--mint-line);
+}
+
+.mint-stat {
+    background: var(--mint-surface);
+    padding: 12px;
+}
+
+.mint-stat-k {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    margin-bottom: 4px;
+}
+
+.mint-stat-v {
+    font-size: 18px;
+    font-weight: 650;
+    color: var(--mint-text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+
+.mint-online {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.mint-online .mint-avatar {
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 0 2px var(--mint-surface);
+}
+
+.mint-online .mint-avatar + .mint-avatar {
+    margin-left: -6px;
+}
+
+/* 签到卡 */
+.mint-sign {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mint-sign-week {
+    display: flex;
+    gap: 6px;
+}
+
+.mint-sign-day {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: var(--mint-r-sm);
+    background: var(--mint-hover);
+    font-size: 11px;
+    color: var(--mint-text-3);
+    line-height: 1.4;
+}
+
+.mint-sign-day b {
+    display: block;
+    font-size: 12px;
+    color: var(--mint-text-2);
+    font-weight: 600;
+}
+
+.mint-sign-day.is-today {
+    background: var(--mint-brand-soft);
+    color: var(--mint-brand-ink);
+}
+
+.mint-sign-day.is-today b {
+    color: var(--mint-brand-ink);
+}
+
+/* 空状态 */
+.mint-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--mint-text-3);
+    font-size: 13px;
+}
+
+/* ---------- 用户悬浮卡（参考 klpbbs 悬停名片） ---------- */
+
+.mint-card-pop {
+    width: 320px;
+    padding: 18px;
+    border-radius: var(--mint-r-lg);
+    background: color-mix(in srgb, var(--mint-surface) 92%, transparent);
+    backdrop-filter: saturate(1.5) blur(20px);
+    -webkit-backdrop-filter: saturate(1.5) blur(20px);
+    border: 1px solid var(--mint-line);
+    box-shadow: 0 18px 48px rgba(17, 20, 19, .16), 0 0 0 1px rgba(17, 20, 19, .04);
+    box-sizing: border-box;
+}
+
+html[data-mint-theme="dark"] .mint-card-pop {
+    background: color-mix(in srgb, #1A1E1D 90%, transparent);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.mint-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.mint-card-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: 0 0 56px;
+    box-shadow: 0 0 0 2px var(--mint-surface), 0 0 0 4px var(--mint-brand-soft);
+    background: var(--mint-hover);
+}
+
+.mint-card-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mint-card-name {
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--mint-text);
+    line-height: 1.3;
+}
+
+.mint-card-level {
+    font-size: 12px;
+    color: var(--mint-text-3);
+    margin-top: 3px;
+}
+
+.mint-card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--mint-line);
+    border: 1px solid var(--mint-line);
+    border-radius: var(--mint-r-md);
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.mint-card-stat {
+    background: var(--mint-surface-2);
+    padding: 10px 6px;
+    text-align: center;
+}
+
+.mint-card-stat b {
+    display: block;
+    font-size: 17px;
+    font-weight: 650;
+    color: var(--mint-text);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+}
+
+.mint-card-stat span {
+    font-size: 11px;
+    color: var(--mint-text-3);
+}
+
+.mint-card-kv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    font-size: 13px;
+    color: var(--mint-text-2);
+    border-bottom: 1px solid var(--mint-line);
+}
+
+.mint-card-kv:last-of-type {
+    border-bottom: 0;
+}
+
+.mint-card-kv b {
+    color: var(--mint-text);
+    font-weight: 550;
+}
+
+.mint-card-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 38px;
+    margin-top: 12px;
+    border-radius: var(--mint-r-md);
+    background: var(--mint-text);
+    color: var(--mint-bg);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity var(--mint-dur-1) var(--mint-ease);
+}
+
+.mint-card-btn:hover {
+    opacity: .9;
+    color: var(--mint-bg);
+}
+
+.mint-card-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.mint-card-links a {
+    color: var(--mint-text-3);
+    text-decoration: none;
+}
+
+.mint-card-links a:hover {
+    color: var(--mint-brand-ink);
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1200px) {
+    #mint-main {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #mint-main > #mint-rail {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) {
+    #mint-side {
+        width: 68px;
+        flex-basis: 68px;
+        padding: 14px 8px;
+    }
+
+    #mint-top {
+        left: 68px;
+        padding: 0 16px;
+    }
+
+    .mint-brand-txt,
+    .mint-nav a span,
+    .mint-nav-label,
+    .mint-side-card {
+        display: none;
+    }
+
+    .mint-brand {
+        justify-content: center;
+        padding: 4px 0 16px;
+    }
+
+    .mint-nav a {
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    #mint-app {
+        display: block;
+    }
+
+    #mint-side,
+    #mint-rail {
+        display: none;
+    }
+
+    #mint-main {
+        display: block;
+        padding: 0 14px 32px;
+    }
+
+    #mint-top {
+        left: 0;
+        padding: 0 14px;
+        height: 56px;
+    }
+
+    #mint-main {
+        padding-top: 56px;
+    }
+
+    #mint-top .mint-search {
+        flex: 1 1 auto;
+    }
+
+    .mint-search-kbd {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}

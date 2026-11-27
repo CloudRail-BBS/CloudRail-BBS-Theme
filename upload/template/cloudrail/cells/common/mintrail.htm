@@ -1,0 +1,58 @@
+<div class="mint-rail-card">
+	<div class="mint-rail-head">
+		<h3>{lang statistics}</h3>
+		<span class="mint-tag"><i class="mint-dot"></i> online</span>
+	</div>
+	<div class="mint-stat-grid">
+		<div class="mint-stat">
+			<div class="mint-stat-k">{lang forum}</div>
+			<div class="mint-stat-v"><!--{if !empty($_G['cache']['forums'])}-->{echo count($_G['cache']['forums'])}<!--{else}-->—<!--{/if}--></div>
+		</div>
+		<div class="mint-stat">
+			<div class="mint-stat-k">{lang usergroups}</div>
+			<div class="mint-stat-v"><!--{if !empty($_G['cache']['usergroups'])}-->{echo count($_G['cache']['usergroups'])}<!--{else}-->—<!--{/if}--></div>
+		</div>
+	</div>
+</div>
+
+<div class="mint-rail-card">
+	<div class="mint-rail-head">
+		<h3>{lang quick_nav}</h3>
+	</div>
+	<div class="mint-list">
+		<a class="mint-row" href="forum.php?mod=post&action=newthread" style="padding-left:0;padding-right:0;">
+			<span class="mint-row-ico">+</span>
+			<span class="mint-row-body">
+				<span class="mint-row-title">{lang post_new}</span>
+				<span class="mint-row-sub">{lang share_idea}</span>
+			</span>
+		</a>
+		<a class="mint-row" href="home.php?mod=space&do=thread&view=me" style="padding-left:0;padding-right:0;">
+			<span class="mint-row-ico">≡</span>
+			<span class="mint-row-body">
+				<span class="mint-row-title">{lang mypost}</span>
+				<span class="mint-row-sub">{lang my_threads}</span>
+			</span>
+		</a>
+		<a class="mint-row" href="home.php?mod=space&do=favorite&view=me" style="padding-left:0;padding-right:0;border-bottom:0;">
+			<span class="mint-row-ico">★</span>
+			<span class="mint-row-body">
+				<span class="mint-row-title">{lang favorite}</span>
+				<span class="mint-row-sub">{lang my_collection}</span>
+			</span>
+		</a>
+	</div>
+</div>
+
+<div class="mint-rail-card">
+	<div class="mint-rail-head">
+		<h3>{lang changestyle}</h3>
+	</div>
+	<div class="mint-sign">
+		<div class="mint-sign-week">
+			<span class="mint-sign-day" data-mint-mode="light">{lang light}<b>Light</b></span>
+			<span class="mint-sign-day" data-mint-mode="dark">{lang dark}<b>Dark</b></span>
+			<span class="mint-sign-day" data-mint-mode="auto">{lang auto}<b>Auto</b></span>
+		</div>
+	</div>
+</div>
