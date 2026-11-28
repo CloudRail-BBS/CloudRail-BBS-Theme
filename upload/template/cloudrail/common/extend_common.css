@@ -3027,7 +3027,7 @@ textarea {
     border: 1px solid var(--mint-line) !important;
     border-radius: var(--mint-r-md) !important;
     background: var(--mint-surface) !important;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* 文本输入区 */
@@ -3067,18 +3067,11 @@ iframe.edt {
 #e_controls {
     background: var(--mint-surface-2) !important;
     border-bottom: 1px solid var(--mint-line) !important;
-    padding: 6px 8px !important;
-    border-radius: var(--mint-r-md) var(--mint-r-md) 0 0;
 }
 
 #e_buttonbar a,
 .edt_toolbar a,
 #e_controls a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 28px;
-    height: 28px;
     border-radius: 6px !important;
     color: var(--mint-text-2) !important;
 }
@@ -3101,7 +3094,8 @@ iframe.edt {
 input#subject {
     width: 100% !important;
     height: 46px !important;
-    line-height: 44px !important;
+    line-height: 28px !important;
+    padding: 8px 14px !important;
     font-size: 15.5px !important;
     font-weight: 600;
     letter-spacing: -.01em;
