@@ -6,3 +6,5 @@ preview/_sim*.html
 *.bak
 tree*.json
 preview/_sim*.png
+
+.tmp/
